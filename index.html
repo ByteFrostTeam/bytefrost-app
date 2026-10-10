@@ -17,6 +17,7 @@
 <meta property="og:description" content="A habit tracker and planner in one. Earn a bronze, silver or gold habit pal every day.">
 <meta property="og:image" content="https://bytefrost.app/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<script src="assets/i18n.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
@@ -59,6 +60,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html.i18n-loading body { visibility: hidden; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -148,6 +150,9 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
   -webkit-background-clip: text; background-clip: text; color: transparent;
   padding-right: 0.04em;
 }
+:lang(ja) .hero h1, :lang(zh-Hans) .hero h1, :lang(zh-Hant) .hero h1, :lang(ko) .hero h1 { font-size: clamp(38px, 5.6vw, 68px); line-height: 1.15; }
+:lang(ja) .hero h1 .grad, :lang(zh-Hans) .hero h1 .grad, :lang(zh-Hant) .hero h1 .grad, :lang(ko) .hero h1 .grad { display: inline-block; }
+:lang(th) .hero h1, :lang(hi) .hero h1 { line-height: 1.2; }
 .hero-sub { font-size: clamp(18px, 2.1vw, 21px); color: var(--ink-2); max-width: 520px; margin: 26px 0 36px; }
 .hero-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 40px; font-size: 14px; color: var(--ink-3); font-weight: 500; }
@@ -418,7 +423,9 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 .foot a { text-decoration: none; color: var(--ink-2); }
 .foot a:hover { color: var(--ink); }
 .foot .brand { color: var(--ink); margin-bottom: 14px; }
-.legal { margin-top: 48px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lang-wrap { display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; color: var(--ink-2); }
+.lang-wrap select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.legal { margin-top: 24px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 /* ---------- Sticky mobile CTA ---------- */
 .sticky-cta {
@@ -508,9 +515,9 @@ body.in-tiktok .tt-note { display: block; }
   <div class="wrap nav-inner">
     <a href="#top" class="brand"><img src="assets/improve-icon.png" alt="">Improve</a>
     <div class="nav-links">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta">Download free</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta" data-i18n="nav.cta">Download free</a>
     </div>
   </div>
 </nav>
@@ -521,36 +528,36 @@ body.in-tiktok .tt-note { display: block; }
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="pill"><img src="assets/tiers/gold.webp" alt="">A new habit pal every day</div>
-      <h1>Build habits. <span class="grad">Earn a pal every day.</span></h1>
-      <p class="hero-sub">Improve is a habit tracker and planner in one. Finish your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.</p>
+      <div class="pill"><img src="assets/tiers/gold.webp" alt=""><span data-i18n="hero.pill">A new habit pal every day</span></div>
+      <h1 data-i18n-html="hero.h1">Build habits. <span class="grad">Earn a pal every day.</span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Improve is a habit tracker and planner in one. Finish your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.</p>
       <div class="hero-actions">
-        <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store">
+        <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store" data-i18n-aria="store.aria">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span><small>Download on the</small><strong>App Store</strong></span>
+          <span><small data-i18n="store.small">Download on the</small><strong data-i18n="store.strong">App Store</strong></span>
         </a>
-        <a href="#how" class="link-arrow">Try it right here <span>→</span></a>
+        <a href="#how" class="link-arrow" data-i18n-html="hero.try">Try it right here <span>→</span></a>
       </div>
-      <div class="tt-note" id="tt-note" role="note"><b>Opening from TikTok?</b> TikTok blocks App Store links in its browser. Tap the <kbd>•••</kbd> menu, choose <kbd>Open in browser</kbd>, then tap Download.</div>
+      <div class="tt-note" id="tt-note" role="note" data-i18n-html="tt.note"><b>Opening from TikTok?</b> TikTok blocks App Store links in its browser. Tap the <kbd>•••</kbd> menu, choose <kbd>Open in browser</kbd>, then tap Download.</div>
       <div class="hero-meta">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free on iPhone</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works with Apple Health</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>30 languages</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.free">Free on iPhone</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.health">Works with Apple Health</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.langs">30 languages</span></span>
       </div>
       <figure class="hero-quote">
-        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-        <blockquote>"The only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding."</blockquote>
-        <figcaption>Improve user, App Store review</figcaption>
+        <span class="stars" aria-label="5 out of 5 stars" data-i18n-aria="hero.stars_aria">★★★★★</span>
+        <blockquote data-i18n="hero.quote">"The only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding."</blockquote>
+        <figcaption data-i18n="hero.quote_by">Improve user, App Store review</figcaption>
       </figure>
     </div>
 
     <div class="hero-visual">
-      <div class="float-card"><img src="assets/icons/run.webp" alt="" style="border-radius:50%"><div><b>+40 trophies</b><small>Daily run done</small></div></div>
+      <div class="float-card"><img src="assets/icons/run.webp" alt="" style="border-radius:50%"><div><b data-i18n="hero.card_b">+40 trophies</b><small data-i18n="hero.card_small">Daily run done</small></div></div>
       <img class="float-pal b" src="assets/pals/nova-gold.webp" alt="">
       <div class="phone">
         <picture>
           <source srcset="assets/screens/landing-dark.webp" media="(prefers-color-scheme: dark)">
-          <img src="assets/screens/landing-light.webp" alt="Improve home screen with today's habit pal and goals grouped by morning, day and evening" width="645" height="1398" fetchpriority="high">
+          <img src="assets/screens/landing-light.webp" alt="Improve home screen with today's habit pal and goals grouped by morning, day and evening" data-i18n-alt="hero.screen_alt" width="645" height="1398" fetchpriority="high">
         </picture>
       </div>
       <img class="float-pal a" src="assets/pals/ember-gold.webp" alt="">
@@ -563,32 +570,32 @@ body.in-tiktok .tt-note { display: block; }
 <section class="section" id="how" style="padding-top: 60px;">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">How it works</span>
-      <h2>Every goal feeds tonight's pal.</h2>
-      <p>Tick off a few goals below and watch what happens. This is exactly how a day in Improve plays out.</p>
+      <span class="eyebrow" data-i18n="nav.how">How it works</span>
+      <h2 data-i18n="how.h2">Every goal feeds tonight's pal.</h2>
+      <p data-i18n="how.p">Tick off a few goals below and watch what happens. This is exactly how a day in Improve plays out.</p>
     </div>
 
     <div class="demo reveal">
       <div class="demo-goals">
-        <h3>Today</h3>
-        <p>Harder goals earn more trophies.</p>
+        <h3 data-i18n="demo.today">Today</h3>
+        <p data-i18n="demo.harder">Harder goals earn more trophies.</p>
         <div id="goals"></div>
-        <div class="goals-done-wrap"><div class="goals-done-label">Completed</div><div id="goals-done"></div></div>
-        <p class="demo-hint">30 trophies earns bronze, 60 silver, 90 gold. <button class="demo-reset" id="reset" type="button">Start over</button></p>
+        <div class="goals-done-wrap"><div class="goals-done-label" data-i18n="demo.completed">Completed</div><div id="goals-done"></div></div>
+        <p class="demo-hint"><span data-i18n="demo.hint">30 trophies earns bronze, 60 silver, 90 gold.</span> <button class="demo-reset" id="reset" type="button" data-i18n="demo.reset">Start over</button></p>
       </div>
       <div class="demo-stage" id="stage">
         <div class="dome">
           <div class="dome-base" id="base"></div>
           <div class="dome-pal" id="pal">
-            <img id="pal-img" src="assets/pals/flick-stage-none.webp" alt="Today's habit pal, still an egg">
+            <img id="pal-img" src="assets/pals/flick-stage-none.webp" alt="Today's habit pal, still an egg" data-i18n-alt="demo.egg_alt">
             <img id="pal-blink" class="blink" src="assets/pals/flick-stage-bronze-blink.webp" alt="">
           </div>
           <div class="dome-glass"></div>
         </div>
         <div class="score">
-          <div class="score-pts" id="pts">0<small>pts</small></div>
-          <div class="score-tier" id="tier">Egg</div>
-          <div class="score-next" id="next">30 pts to Bronze</div>
+          <div class="score-pts" id="pts">0<small data-i18n="demo.pts">pts</small></div>
+          <div class="score-tier" id="tier" data-i18n="demo.tier_egg">Egg</div>
+          <div class="score-next" id="next" data-i18n="demo.to_bronze_initial">30 pts to Bronze</div>
         </div>
         <div class="bar"><div class="bar-fill" id="bar"></div>
           <div class="bar-mark" style="left:33.3%" data-at="30"><img src="assets/tiers/bronze.webp" alt=""></div>
@@ -601,18 +608,18 @@ body.in-tiktok .tt-note { display: block; }
     <div class="steps">
       <div class="step reveal">
         <div class="step-n">01</div>
-        <h3>Pick how hard to push</h3>
-        <p>Tag each goal Easy, Moderate or Challenging. Light days build the habit. Hard days earn gold.</p>
+        <h3 data-i18n="steps.h1">Pick how hard to push</h3>
+        <p data-i18n="steps.p1">Tag each goal Easy, Moderate or Challenging. Light days build the habit. Hard days earn gold.</p>
       </div>
       <div class="step reveal">
         <div class="step-n">02</div>
-        <h3>Earn trophies all day</h3>
-        <p>Habits and to-dos both pay out, so every bit of progress counts toward tonight's pal.</p>
+        <h3 data-i18n="steps.h2">Earn trophies all day</h3>
+        <p data-i18n="steps.p2">Habits and to-dos both pay out, so every bit of progress counts toward tonight's pal.</p>
       </div>
       <div class="step reveal">
         <div class="step-n">03</div>
-        <h3>Keep what you earned</h3>
-        <p>Your pal joins the shelf based on how much you did, not whether you did everything. No pal is ever taken away.</p>
+        <h3 data-i18n="steps.h3">Keep what you earned</h3>
+        <p data-i18n="steps.p3">Your pal joins the shelf based on how much you did, not whether you did everything. No pal is ever taken away.</p>
         <div class="tier-row">
           <span class="tier-chip"><img src="assets/tiers/bronze.webp" alt="">30</span>
           <span class="tier-chip"><img src="assets/tiers/silver.webp" alt="">60</span>
@@ -627,24 +634,24 @@ body.in-tiktok .tt-note { display: block; }
 <section class="section reviews" id="reviews">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">Loved by people like you</span>
-      <h2>Real reviews from Improve users.</h2>
+      <span class="eyebrow" data-i18n="reviews.eyebrow">Loved by people like you</span>
+      <h2 data-i18n="reviews.h2">Real reviews from Improve users.</h2>
     </div>
     <div class="review-grid">
       <figure class="review reveal">
         <span class="stars">★★★★★</span>
-        <blockquote>Been looking for something like this for a few years now. The simplicity of getting started and using it daily is why this is the only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding. The clean interface is a big bonus!</blockquote>
-        <figcaption>App Store review</figcaption>
+        <blockquote data-i18n="reviews.q1">Been looking for something like this for a few years now. The simplicity of getting started and using it daily is why this is the only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding. The clean interface is a big bonus!</blockquote>
+        <figcaption data-i18n="reviews.by">App Store review</figcaption>
       </figure>
       <figure class="review reveal">
         <span class="stars">★★★★★</span>
-        <blockquote>Great app with a clean design and easy-to-use features. It's really helped me stay consistent with my daily routines and habits. Highly recommend!</blockquote>
-        <figcaption>App Store review</figcaption>
+        <blockquote data-i18n="reviews.q2">Great app with a clean design and easy-to-use features. It's really helped me stay consistent with my daily routines and habits. Highly recommend!</blockquote>
+        <figcaption data-i18n="reviews.by">App Store review</figcaption>
       </figure>
       <figure class="review reveal">
         <span class="stars">★★★★★</span>
-        <blockquote>Excellent app for building and maintaining good habits! It's easy and well designed. I love being motivated to track my progress so clearly. Definitely one of the best habit trackers I've tried!</blockquote>
-        <figcaption>App Store review</figcaption>
+        <blockquote data-i18n="reviews.q3">Excellent app for building and maintaining good habits! It's easy and well designed. I love being motivated to track my progress so clearly. Definitely one of the best habit trackers I've tried!</blockquote>
+        <figcaption data-i18n="reviews.by">App Store review</figcaption>
       </figure>
     </div>
   </div>
@@ -654,57 +661,57 @@ body.in-tiktok .tt-note { display: block; }
 <section class="section" id="features">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Everything in one place</span>
-      <h2>Habits and plans, finally together.</h2>
-      <p>Recurring habits, a prioritized to-do list and everything due today, all in one calm view.</p>
+      <span class="eyebrow" data-i18n="features.eyebrow">Everything in one place</span>
+      <h2 data-i18n="features.h2">Habits and plans, finally together.</h2>
+      <p data-i18n="features.p">Recurring habits, a prioritized to-do list and everything due today, all in one calm view.</p>
     </div>
 
     <div class="bento">
       <div class="card span-6 card-split reveal">
         <div class="copy">
-          <span class="eyebrow">Plans</span>
-          <h3>A busy mind breaks habits. Park everything here.</h3>
-          <p>Sort your to-dos by priority and knock them out. Bigger tasks pay more trophies, and everything you finish today feeds tonight's habit pal.</p>
-          <div class="prio"><span class="p-high">HIGH · 40</span><span class="p-med">MEDIUM · 25</span><span class="p-low">LOW · 10</span><span class="p-todo">TO-DO · 10</span></div>
+          <span class="eyebrow" data-i18n="plans.eyebrow">Plans</span>
+          <h3 data-i18n="plans.h3">A busy mind breaks habits. Park everything here.</h3>
+          <p data-i18n="plans.p">Sort your to-dos by priority and knock them out. Bigger tasks pay more trophies, and everything you finish today feeds tonight's habit pal.</p>
+          <div class="prio"><span class="p-high" data-i18n="plans.high">HIGH · 40</span><span class="p-med" data-i18n="plans.med">MEDIUM · 25</span><span class="p-low" data-i18n="plans.low">LOW · 10</span><span class="p-todo" data-i18n="plans.todo">TO-DO · 10</span></div>
         </div>
         <div class="phone">
           <picture>
             <source srcset="assets/screens/plans-dark.webp" media="(prefers-color-scheme: dark)">
-            <img src="assets/screens/plans-light.webp" alt="Plans screen with to-dos sorted into high, medium, low and to-do priorities" width="645" height="1398" loading="lazy">
+            <img src="assets/screens/plans-light.webp" alt="Plans screen with to-dos sorted into high, medium, low and to-do priorities" data-i18n-alt="plans.alt" width="645" height="1398" loading="lazy">
           </picture>
         </div>
       </div>
 
       <div class="card span-3 compare-card reveal">
-        <span class="eyebrow">How you compare</span>
-        <h3>See where you actually stand.</h3>
-        <p>Your sleep, steps, water and reading against real population data, with sources.</p>
+        <span class="eyebrow" data-i18n="compare.eyebrow">How you compare</span>
+        <h3 data-i18n="compare.h3">See where you actually stand.</h3>
+        <p data-i18n="compare.p">Your sleep, steps, water and reading against real population data, with sources.</p>
         <div class="compare-list">
-          <div>You get more daily steps than <b>78%</b> of people<small>Source: Bassett/Tudor-Locke international step counts</small></div>
-          <div>You get more sleep than <b>64%</b> of people<small>Source: CDC BRFSS, OECD Time Use</small></div>
-          <div>You spend <b>3.4x</b> the average person's time on reading<small>Source: American Time Use Survey</small></div>
+          <div data-i18n-html="compare.l1">You get more daily steps than <b>78%</b> of people<small>Source: Bassett/Tudor-Locke international step counts</small></div>
+          <div data-i18n-html="compare.l2">You get more sleep than <b>64%</b> of people<small>Source: CDC BRFSS, OECD Time Use</small></div>
+          <div data-i18n-html="compare.l3">You spend <b>3.4x</b> the average person's time on reading<small>Source: American Time Use Survey</small></div>
         </div>
       </div>
 
       <div class="card span-3 reveal">
-        <span class="eyebrow">See the big picture</span>
-        <h3>One glance shows the year you built.</h3>
-        <p>Every pal joins the shelf. Look back at your week, month or whole year and spot what's actually working.</p>
+        <span class="eyebrow" data-i18n="shelf.eyebrow">See the big picture</span>
+        <h3 data-i18n="shelf.h3">One glance shows the year you built.</h3>
+        <p data-i18n="shelf.p">Every pal joins the shelf. Look back at your week, month or whole year and spot what's actually working.</p>
         <div class="shelf" id="shelf"></div>
       </div>
 
       <div class="card span-2 reveal">
-        <span class="eyebrow">Streaks</span>
-        <h3>Keep the fire going.</h3>
-        <p>Every day you earn a pal, your streak grows. Milestones go all the way to 1000 days.</p>
+        <span class="eyebrow" data-i18n="streaks.eyebrow">Streaks</span>
+        <h3 data-i18n="streaks.h3">Keep the fire going.</h3>
+        <p data-i18n="streaks.p">Every day you earn a pal, your streak grows. Milestones go all the way to 1000 days.</p>
         <div class="stat-big"><span class="flame">🔥</span> 191</div>
-        <p style="font-size:14px;color:var(--ink-3)">days and counting</p>
+        <p style="font-size:14px;color:var(--ink-3)" data-i18n="streaks.days">days and counting</p>
       </div>
 
       <div class="card span-2 reveal">
-        <span class="eyebrow">Friends</span>
-        <h3>Streaks you share.</h3>
-        <p>Add friends with a code and see their pals. When you both earn one on the same day, your shared streak grows.</p>
+        <span class="eyebrow" data-i18n="friends.eyebrow">Friends</span>
+        <h3 data-i18n="friends.h3">Streaks you share.</h3>
+        <p data-i18n="friends.p">Add friends with a code and see their pals. When you both earn one on the same day, your shared streak grows.</p>
         <div class="friends">
           <img src="assets/pals/mochi-gold.webp" alt="" loading="lazy">
           <img src="assets/pals/aquli-gold.webp" alt="" loading="lazy">
@@ -715,15 +722,15 @@ body.in-tiktok .tt-note { display: block; }
 
       <div class="card span-2 reveal">
         <div class="health-ic"><svg viewBox="0 0 24 24"><path fill="#FF2D55" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.1 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3 1.8-1.8 3.3-3 5.4-3 3.6 0 5.7 3.6 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg></div>
-        <span class="eyebrow">Apple Health</span>
-        <h3>Logs itself.</h3>
-        <p>Steps, calories, distance and other health habits fill in automatically. No typing required.</p>
+        <span class="eyebrow" data-i18n="health.eyebrow">Apple Health</span>
+        <h3 data-i18n="health.h3">Logs itself.</h3>
+        <p data-i18n="health.p">Steps, calories, distance and other health habits fill in automatically. No typing required.</p>
       </div>
 
       <div class="card span-3 reveal">
-        <span class="eyebrow">Make it yours</span>
-        <h3>8 themes, light or dark.</h3>
-        <p>Pick a palette that matches your mood, then switch between light, dark or automatic.</p>
+        <span class="eyebrow" data-i18n="themes.eyebrow">Make it yours</span>
+        <h3 data-i18n="themes.h3">8 themes, light or dark.</h3>
+        <p data-i18n="themes.p">Pick a palette that matches your mood, then switch between light, dark or automatic.</p>
         <div class="themes">
           <span style="background:linear-gradient(160deg,#94A3B8,#1E293B)" title="Slate"></span>
           <span style="background:linear-gradient(160deg,#A78BFA,#3730A3)" title="Aurora"></span>
@@ -737,9 +744,9 @@ body.in-tiktok .tt-note { display: block; }
       </div>
 
       <div class="card span-3 reveal">
-        <span class="eyebrow">Built around you</span>
-        <h3>Morning, day or evening.</h3>
-        <p>Goals sit in the part of the day you do them. Track counts, minutes or steps, set reminders, and choose from 100+ icons.</p>
+        <span class="eyebrow" data-i18n="built.eyebrow">Built around you</span>
+        <h3 data-i18n="built.h3">Morning, day or evening.</h3>
+        <p data-i18n="built.p">Goals sit in the part of the day you do them. Track counts, minutes or steps, set reminders, and choose from 100+ icons.</p>
         <div class="icons-row"><img src="assets/icons/yoga.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/sleep.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/writejournal.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/gymworkout.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/walkthedog.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/healthymeal.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/swim.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/learnlanguage.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/gratitude.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/coldshower.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/makebed.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/timeinnature.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/waterplants.webp" alt="" loading="lazy" width="128" height="128"><img src="assets/icons/bike.webp" alt="" loading="lazy" width="128" height="128"></div>
       </div>
     </div>
@@ -749,27 +756,27 @@ body.in-tiktok .tt-note { display: block; }
 <!-- ================= FAQ ================= -->
 <section class="section" id="faq" style="padding-top: 40px;">
   <div class="wrap">
-    <div class="section-head center reveal"><h2>Questions</h2></div>
+    <div class="section-head center reveal"><h2 data-i18n="faq.h2">Questions</h2></div>
     <div class="faq reveal">
       <details>
-        <summary>What happens if I miss a day?</summary>
-        <p>Nothing is taken away. Your progress only ever moves forward. Every pal you earned stays on your shelf, and your streak simply starts again the next day you earn a pal.</p>
+        <summary data-i18n="faq.q1">What happens if I miss a day?</summary>
+        <p data-i18n="faq.a1">Nothing is taken away. Your progress only ever moves forward. Every pal you earned stays on your shelf, and your streak simply starts again the next day you earn a pal.</p>
       </details>
       <details>
-        <summary>Do I have to finish everything to earn a pal?</summary>
-        <p>No. Your pal is based on how much you did, not whether you did everything. 30 trophies earns bronze, 60 silver and 90 gold.</p>
+        <summary data-i18n="faq.q2">Do I have to finish everything to earn a pal?</summary>
+        <p data-i18n="faq.a2">No. Your pal is based on how much you did, not whether you did everything. 30 trophies earns bronze, 60 silver and 90 gold.</p>
       </details>
       <details>
-        <summary>Is Improve free?</summary>
-        <p>Yes. Improve is free to download and use. Some features require an Improve Premium subscription, which you can find inside the app.</p>
+        <summary data-i18n="faq.q3">Is Improve free?</summary>
+        <p data-i18n="faq.a3">Yes. Improve is free to download and use. Some features require an Improve Premium subscription, which you can find inside the app.</p>
       </details>
       <details>
-        <summary>Is it available on Android?</summary>
-        <p>Improve is available for iPhone today.</p>
+        <summary data-i18n="faq.q4">Is it available on Android?</summary>
+        <p data-i18n="faq.a4">Improve is available for iPhone today.</p>
       </details>
       <details>
-        <summary>How do I delete my account and data?</summary>
-        <p>You can delete your account from Settings in the app at any time. You can also <a href="https://bytefrostteam.github.io/policies/account-deletion.html">request deletion here</a>.</p>
+        <summary data-i18n="faq.q5">How do I delete my account and data?</summary>
+        <p data-i18n-html="faq.a5">You can delete your account from Settings in the app at any time. You can also <a href="https://bytefrostteam.github.io/policies/account-deletion.html">request deletion here</a>.</p>
       </details>
     </div>
   </div>
@@ -779,13 +786,13 @@ body.in-tiktok .tt-note { display: block; }
 <section class="final">
   <div class="wrap">
     <div class="final-card reveal">
-      <h2>Start building better days.</h2>
-      <p>Free on the App Store. Your first habit pal is waiting.</p>
-      <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-footer&mt=8" aria-label="Download Improve on the App Store">
+      <h2 data-i18n="final.h2">Start building better days.</h2>
+      <p data-i18n="final.p">Free on the App Store. Your first habit pal is waiting.</p>
+      <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-footer&mt=8" aria-label="Download Improve on the App Store" data-i18n-aria="store.aria">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <span><small>Download on the</small><strong>App Store</strong></span>
+        <span><small data-i18n="store.small">Download on the</small><strong data-i18n="store.strong">App Store</strong></span>
       </a>
-      <img class="group" src="assets/pals/group.webp" alt="A group of habit pals with an egg" loading="lazy">
+      <img class="group" src="assets/pals/group.webp" alt="A group of habit pals with an egg" data-i18n-alt="final.group_alt" loading="lazy">
     </div>
   </div>
 </section>
@@ -794,8 +801,8 @@ body.in-tiktok .tt-note { display: block; }
 
 <div class="sticky-cta" id="sticky" aria-hidden="true">
   <img src="assets/improve-icon.png" alt="">
-  <div class="sticky-text"><b>Improve: Habit Tracker</b><small>Free on the App Store</small></div>
-  <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-sticky&mt=8" class="sticky-btn">Get</a>
+  <div class="sticky-text"><b data-i18n="sticky.title">Improve: Habit Tracker</b><small data-i18n="sticky.sub">Free on the App Store</small></div>
+  <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-sticky&mt=8" class="sticky-btn" data-i18n="sticky.btn">Get</a>
 </div>
 
 <footer>
@@ -803,35 +810,38 @@ body.in-tiktok .tt-note { display: block; }
     <div class="foot">
       <div>
         <a href="#top" class="brand"><img src="assets/improve-icon.png" alt="">Improve</a>
-        <p>Made by ByteFrost AB in Stockholm, Sweden.</p>
+        <p data-i18n="foot.made">Made by ByteFrost AB in Stockholm, Sweden.</p>
       </div>
       <div class="foot-cols">
         <div>
-          <h4>App</h4>
+          <h4 data-i18n="foot.app">App</h4>
           <ul>
-            <li><a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-links&mt=8">App Store</a></li>
-            <li><a href="#how">How it works</a></li>
+            <li><a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-links&mt=8" data-i18n="foot.appstore">App Store</a></li>
+            <li><a href="#how" data-i18n="nav.how">How it works</a></li>
           </ul>
         </div>
         <div>
-          <h4>Support</h4>
+          <h4 data-i18n="foot.support">Support</h4>
           <ul>
             <li><a href="mailto:contact@byte-frost.com">contact@byte-frost.com</a></li>
-            <li><a href="https://bytefrostteam.github.io/policies/account-deletion.html">Delete account</a></li>
+            <li><a href="https://bytefrostteam.github.io/policies/account-deletion.html" data-i18n="foot.delete">Delete account</a></li>
           </ul>
         </div>
         <div>
-          <h4>Legal</h4>
+          <h4 data-i18n="foot.legal">Legal</h4>
           <ul>
-            <li><a href="https://bytefrostteam.github.io/policies/privacy.html">Privacy Policy</a></li>
-            <li><a href="https://bytefrostteam.github.io/policies/terms.html">Terms of Use</a></li>
+            <li><a href="https://bytefrostteam.github.io/policies/privacy.html" data-i18n="foot.privacy">Privacy Policy</a></li>
+            <li><a href="https://bytefrostteam.github.io/policies/terms.html" data-i18n="foot.terms">Terms of Use</a></li>
           </ul>
         </div>
       </div>
     </div>
+    <label class="lang-wrap"><span data-i18n="foot.language">Language</span>
+      <select id="lang-select" aria-label="Language"><option value="en">English</option><option value="cs">Čeština</option><option value="da">Dansk</option><option value="de">Deutsch</option><option value="el">Ελληνικά</option><option value="es">Español</option><option value="fi">Suomi</option><option value="fr">Français</option><option value="hi">हिन्दी</option><option value="hr">Hrvatski</option><option value="hu">Magyar</option><option value="id">Bahasa Indonesia</option><option value="it">Italiano</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="ms">Bahasa Melayu</option><option value="nb">Norsk</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="pt">Português</option><option value="ro">Română</option><option value="ru">Русский</option><option value="sk">Slovenčina</option><option value="sv">Svenska</option><option value="th">ไทย</option><option value="tr">Türkçe</option><option value="uk">Українська</option><option value="vi">Tiếng Việt</option><option value="zh-Hans">简体中文</option><option value="zh-Hant">繁體中文</option></select>
+    </label>
     <div class="legal">
       <span>© <span id="year">2026</span> ByteFrost AB · Org.nr 559554-5129</span>
-      <span>Apple, the Apple logo and App Store are trademarks of Apple Inc.</span>
+      <span data-i18n="foot.trademark">Apple, the Apple logo and App Store are trademarks of Apple Inc.</span>
     </div>
   </div>
 </footer>
@@ -844,6 +854,8 @@ body.in-tiktok .tt-note { display: block; }
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = id => document.getElementById(id);
+  const langSel = $('lang-select');
+  langSel.addEventListener('change', () => { try { localStorage.setItem('lang', langSel.value); } catch (e) {} const u = new URL(location.href); u.searchParams.set('lang', langSel.value); location.href = u.toString(); });
   if (/musical_ly|TikTok|Bytedance/i.test(navigator.userAgent)) document.body.classList.add('in-tiktok');
   document.getElementById('year').textContent = new Date().getFullYear();
 

@@ -1,9 +1,10 @@
 /* Improve "try it" demo. Motion values mirror the app:
    GoalRow.tsx, CelebrationLayer.tsx, ConfettiBurst.tsx, HabitPal.tsx,
    HabitPalHatch.tsx, HabitPalEvolution.tsx and app/(tabs)/index.tsx. */
-(() => {
+function startDemo() {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (id) => document.getElementById(id);
+  const T = (k, fb, vars) => { let v = (window.I18N && window.I18N[k]) || fb; if (vars) for (const n in vars) v = v.replace('{' + n + '}', vars[n]); return v; };
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const lerp = (a, b, t) => a + (b - a) * t;
   const rand = (a, b) => a + Math.random() * (b - a);
@@ -82,16 +83,16 @@
 
   // ---------- data ----------
   const GOALS = [
-    { icon: 'drinkwater', name: 'Drink water', sub: '8 glasses · Easy', pts: 10, grad: ['#0284C7', '#38BDF8'] },
-    { icon: 'meditate', name: 'Meditate', sub: '10 minutes · Moderate', pts: 25, grad: ['#7C3AED', '#A78BFA'] },
-    { icon: 'read', name: 'Read daily', sub: '15 minutes · Moderate', pts: 25, grad: ['#0E7490', '#06B6D4'] },
-    { icon: 'run', name: 'Daily run', sub: '20 minutes · Challenging', pts: 40, grad: ['#E11D48', '#FB7185'] },
+    { icon: 'drinkwater', name: T('demo.goal1', 'Drink water'), sub: T('demo.goal1_sub', '8 glasses · Easy'), pts: 10, grad: ['#0284C7', '#38BDF8'] },
+    { icon: 'meditate', name: T('demo.goal2', 'Meditate'), sub: T('demo.goal2_sub', '10 minutes · Moderate'), pts: 25, grad: ['#7C3AED', '#A78BFA'] },
+    { icon: 'read', name: T('demo.goal3', 'Read daily'), sub: T('demo.goal3_sub', '15 minutes · Moderate'), pts: 25, grad: ['#0E7490', '#06B6D4'] },
+    { icon: 'run', name: T('demo.goal4', 'Daily run'), sub: T('demo.goal4_sub', '20 minutes · Challenging'), pts: 40, grad: ['#E11D48', '#FB7185'] },
   ];
   const TIERS = [
-    { at: 0, key: 'none', label: 'Egg', next: 'Bronze', metal: ['#33323D', '#98949F', '#55525F', '#25242D'], face: '#E9EDF3', back: '#ADB5C0', bar: ['#CD7F32', '#B87333'], glow: 'rgba(200,115,35,0.18)', sparks: ['#FFFFFF', '#D9DEE6', '#ADB5C0'] },
-    { at: 30, key: 'bronze', label: 'Bronze habit pal', next: 'Silver', metal: ['#864522', '#F6C29A', '#B77342', '#774122'], face: '#CD7F32', back: '#B87333', bar: ['#C0C0C0', '#A8A8A8'], glow: 'rgba(200,115,35,0.45)', palette: ['#CD7F32', '#B87333', '#FFE3B3'], dim: 0.88, size: 106, hold: 2700, sats: 2, burst: 44, bloom: ['rgba(150,85,35,.32)', 'rgba(10,6,3,.5)'], title: 'Bronze.', sub: 'Your habit pal has arrived.' },
-    { at: 60, key: 'silver', label: 'Silver habit pal', next: 'Gold', metal: ['#666F7E', '#F4F7FF', '#ACB6C7', '#606A79'], face: '#C0C0C0', back: '#A8A8A8', bar: ['#FFD700', '#B8860B'], glow: 'rgba(110,140,180,0.58)', palette: ['#C0C0C0', '#A8A8A8', '#E8EEF6'], dim: 0.91, size: 120, hold: 3100, sats: 3, burst: 64, bloom: ['rgba(150,165,185,.24)', 'rgba(8,10,14,.5)'], title: 'Silver.', sub: 'Almost there. Gold is within reach.', evo: { total: 1700, rise: 420, set: 640, gloss: 760, flash: 1020, reveal: 1100, fade: 400, grow: 620, bounce: 0.08, shards: 9, shardMs: 700, colors: ['#6F8199', '#C3D3E6', '#FFFFFF'] } },
-    { at: 90, key: 'gold', label: 'Gold habit pal', next: null, metal: ['#96671A', '#FFE7A0', '#D4A444', '#8B5B12'], face: '#FFD700', back: '#B8860B', bar: ['#FFD700', '#B8860B'], glow: 'rgba(220,170,0,0.5)', palette: ['#FFD700', '#B8860B', '#FFF4C2'], dim: 0.94, size: 140, hold: 3900, sats: 3, burst: 28, bloom: ['rgba(205,150,30,.32)', 'rgba(12,9,2,.55)'], title: 'Gold.', sub: "That's a perfect day.", evo: { total: 2000, rise: 480, set: 740, gloss: 900, flash: 1200, reveal: 1290, fade: 520, grow: 760, bounce: 0.12, shards: 12, shardMs: 900, colors: ['#A0681C', '#E8BD4B', '#FFF4C2'] } },
+    { at: 0, key: 'none', label: T('demo.tier_egg', 'Egg'), next: T('demo.bronze', 'Bronze'), metal: ['#33323D', '#98949F', '#55525F', '#25242D'], face: '#E9EDF3', back: '#ADB5C0', bar: ['#CD7F32', '#B87333'], glow: 'rgba(200,115,35,0.18)', sparks: ['#FFFFFF', '#D9DEE6', '#ADB5C0'] },
+    { at: 30, key: 'bronze', label: T('demo.tier_bronze', 'Bronze habit pal'), next: T('demo.silver', 'Silver'), metal: ['#864522', '#F6C29A', '#B77342', '#774122'], face: '#CD7F32', back: '#B87333', bar: ['#C0C0C0', '#A8A8A8'], glow: 'rgba(200,115,35,0.45)', palette: ['#CD7F32', '#B87333', '#FFE3B3'], dim: 0.88, size: 106, hold: 2700, sats: 2, burst: 44, bloom: ['rgba(150,85,35,.32)', 'rgba(10,6,3,.5)'], title: T('demo.cap_bronze', 'Bronze.'), sub: T('demo.cap_bronze_sub', 'Your habit pal has arrived.') },
+    { at: 60, key: 'silver', label: T('demo.tier_silver', 'Silver habit pal'), next: T('demo.gold', 'Gold'), metal: ['#666F7E', '#F4F7FF', '#ACB6C7', '#606A79'], face: '#C0C0C0', back: '#A8A8A8', bar: ['#FFD700', '#B8860B'], glow: 'rgba(110,140,180,0.58)', palette: ['#C0C0C0', '#A8A8A8', '#E8EEF6'], dim: 0.91, size: 120, hold: 3100, sats: 3, burst: 64, bloom: ['rgba(150,165,185,.24)', 'rgba(8,10,14,.5)'], title: T('demo.cap_silver', 'Silver.'), sub: T('demo.cap_silver_sub', 'Almost there. Gold is within reach.'), evo: { total: 1700, rise: 420, set: 640, gloss: 760, flash: 1020, reveal: 1100, fade: 400, grow: 620, bounce: 0.08, shards: 9, shardMs: 700, colors: ['#6F8199', '#C3D3E6', '#FFFFFF'] } },
+    { at: 90, key: 'gold', label: T('demo.tier_gold', 'Gold habit pal'), next: null, metal: ['#96671A', '#FFE7A0', '#D4A444', '#8B5B12'], face: '#FFD700', back: '#B8860B', bar: ['#FFD700', '#B8860B'], glow: 'rgba(220,170,0,0.5)', palette: ['#FFD700', '#B8860B', '#FFF4C2'], dim: 0.94, size: 140, hold: 3900, sats: 3, burst: 28, bloom: ['rgba(205,150,30,.32)', 'rgba(12,9,2,.55)'], title: T('demo.cap_gold', 'Gold.'), sub: T('demo.cap_gold_sub', "That's a perfect day."), evo: { total: 2000, rise: 480, set: 740, gloss: 900, flash: 1200, reveal: 1290, fade: 520, grow: 760, bounce: 0.12, shards: 12, shardMs: 900, colors: ['#A0681C', '#E8BD4B', '#FFF4C2'] } },
   ];
   const HATCH_MS = 2400;
   const PAL = 'flick'; // Flick's larva -> moth -> butterfly stages read clearly at every tier
@@ -194,7 +195,7 @@
     palTier = tier;
     palImg.src = sprite(tier);
     palBlink.src = sprite(tier === 'none' ? 'bronze' : tier, true);
-    palImg.alt = tier === 'none' ? "Today's habit pal, still an egg" : `Flick, ${tier} habit pal`;
+    palImg.alt = tier === 'none' ? T('demo.egg_alt', "Today's habit pal, still an egg") : T('demo.pal_alt', 'Flick, {tier} habit pal', { tier });
   }
   function setBase(tier, crossfade) {
     const m = TIERS.find((t) => t.key === tier).metal;
@@ -211,7 +212,7 @@
     tierEl.textContent = tier.label;
     ptsEl.style.setProperty('--tier-color', t ? tier.face : 'var(--ink)');
     const nextT = TIERS[t + 1];
-    nextEl.textContent = nextT ? `${nextT.at - pts} pts to ${nextT.at === 30 ? 'Bronze' : nextT.at === 60 ? 'Silver' : 'Gold'}` : 'Gold achieved!';
+    nextEl.textContent = nextT ? T('demo.to_tier', '{n} pts to {tier}', { n: nextT.at - pts, tier: tier.next }) : T('demo.gold_done', 'Gold achieved!');
     const lo = tier.at, hi = nextT ? nextT.at : 90;
     const ratio = nextT ? clamp((pts - lo) / (hi - lo), 0, 1) : 1;
     const band = nextT ? tier.bar : TIERS[3].bar;
@@ -224,7 +225,7 @@
   }
   function countTo(target) {
     const from = shown;
-    timing({ duration: reduced ? 0 : 400, easing: E.outCubic, update: (v, p) => { shown = Math.round(lerp(from, target, p)); ptsEl.innerHTML = shown + '<small>pts</small>'; } });
+    timing({ duration: reduced ? 0 : 400, easing: E.outCubic, update: (v, p) => { shown = Math.round(lerp(from, target, p)); ptsEl.innerHTML = shown + '<small>' + T('demo.pts', 'pts') + '</small>'; } });
   }
   function counterLand() {
     // 10-piece gold burst, scale 1 -> 1.24 (110ms outQuad) then gentle spring, wobble -7 / +4 / 0
@@ -361,7 +362,7 @@
     const centerPt = { x: innerWidth / 2, y: innerHeight / 2 - 40 };
     const from = { x: palRect.left + palRect.width / 2, y: palRect.top + palRect.height / 2 };
 
-    cer.innerHTML = `<div class="cer-dim"></div><div class="cer-bloom"></div><div class="cer-flight"><img class="cer-pal" src="${sprite(TIERS[oldT].key)}" alt=""></div><div class="cer-caption"><div class="cer-title">${tier.title}</div><div class="cer-sub">${tier.sub}</div></div><div class="cer-hint">Tap anywhere to continue</div>`;
+    cer.innerHTML = `<div class="cer-dim"></div><div class="cer-bloom"></div><div class="cer-flight"><img class="cer-pal" src="${sprite(TIERS[oldT].key)}" alt=""></div><div class="cer-caption"><div class="cer-title">${tier.title}</div><div class="cer-sub">${tier.sub}</div></div><div class="cer-hint">${T('demo.tap', 'Tap anywhere to continue')}</div>`;
     cer.hidden = false;
     const dim = cer.querySelector('.cer-dim'), bloom = cer.querySelector('.cer-bloom'), flight = cer.querySelector('.cer-flight'), cap = cer.querySelector('.cer-caption'), hint = cer.querySelector('.cer-hint');
     dim.style.background = `rgba(0,0,0,${tier.dim})`;
@@ -532,7 +533,7 @@
   doneEl.addEventListener('click', (e) => {
     const btn = e.target.closest('.goal'); if (!btn || busy) return;
     const i = +btn.dataset.i; done.delete(i); undoRow(btn, GOALS[i]);
-    const p = total(); tierIdx = tierFor(p); shown = p; ptsEl.innerHTML = p + '<small>pts</small>';
+    const p = total(); tierIdx = tierFor(p); shown = p; ptsEl.innerHTML = p + '<small>' + T('demo.pts', 'pts') + '</small>';
     setPalSprite(TIERS[tierIdx].key); setBase(TIERS[tierIdx].key); renderNumbers(p, false);
   });
   $('reset').addEventListener('click', () => {
@@ -544,4 +545,5 @@
   });
 
   setPalSprite('none'); renderNumbers(0, false);
-})();
+}
+if (window.I18N_READY) startDemo(); else addEventListener('i18n:ready', startDemo, { once: true });
