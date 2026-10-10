@@ -94,7 +94,8 @@
     { at: 90, key: 'gold', label: 'Gold habit pal', next: null, metal: ['#96671A', '#FFE7A0', '#D4A444', '#8B5B12'], face: '#FFD700', back: '#B8860B', bar: ['#FFD700', '#B8860B'], glow: 'rgba(220,170,0,0.5)', palette: ['#FFD700', '#B8860B', '#FFF4C2'], dim: 0.94, size: 140, hold: 3900, sats: 3, burst: 28, bloom: ['rgba(205,150,30,.32)', 'rgba(12,9,2,.55)'], title: 'Gold.', sub: "That's a perfect day.", evo: { total: 2000, rise: 480, set: 740, gloss: 900, flash: 1200, reveal: 1290, fade: 520, grow: 760, bounce: 0.12, shards: 12, shardMs: 900, colors: ['#A0681C', '#E8BD4B', '#FFF4C2'] } },
   ];
   const HATCH_MS = 2400;
-  const sprite = (tier, blink) => `assets/pals/ember-stage-${tier}${blink ? '-blink' : ''}.webp`;
+  const PAL = 'flick'; // Flick's larva -> moth -> butterfly stages read clearly at every tier
+  const sprite = (tier, blink) => `assets/pals/${PAL}-stage-${tier}${blink ? '-blink' : ''}.webp`;
   const TROPHY = '<svg viewBox="0 0 512 512" aria-hidden="true"><path d="M448 64h-64V48a16 16 0 0 0-16-16H144a16 16 0 0 0-16 16v16H64a16 16 0 0 0-16 16v64c0 44.11 36.5 80.3 80 83.73v.27C128 282.3 181.53 336 240 336h16v48h-48a32 32 0 0 0-32 32v32h160v-32a32 32 0 0 0-32-32h-48v-48h16c58.47 0 112-53.7 112-108v-.27c43.5-3.43 80-39.62 80-83.73V80a16 16 0 0 0-16-16zM80 144v-48h48v96c-26.47-3.84-48-24.36-48-48zm352 0c0 23.64-21.53 44.16-48 48V96h48z"/></svg>';
   const SCALE = clamp(Math.min(innerWidth, innerHeight) / 420, 1, 1.5); // phone px -> this viewport
 
@@ -193,7 +194,7 @@
     palTier = tier;
     palImg.src = sprite(tier);
     palBlink.src = sprite(tier === 'none' ? 'bronze' : tier, true);
-    palImg.alt = tier === 'none' ? "Today's habit pal, still an egg" : `Ember, ${tier} habit pal`;
+    palImg.alt = tier === 'none' ? "Today's habit pal, still an egg" : `Flick, ${tier} habit pal`;
   }
   function setBase(tier, crossfade) {
     const m = TIERS.find((t) => t.key === tier).metal;
@@ -439,7 +440,7 @@
       ${[...Array(8)].map((_, k) => `<img class="h-wedge" src="${sprite('none')}" alt="" style="clip-path:polygon(50% 50%, ${50 + 60 * Math.cos(k * Math.PI / 4)}% ${50 + 60 * Math.sin(k * Math.PI / 4)}%, ${50 + 60 * Math.cos((k + 0.5) * Math.PI / 4)}% ${50 + 60 * Math.sin((k + 0.5) * Math.PI / 4)}%, ${50 + 60 * Math.cos((k + 1) * Math.PI / 4)}% ${50 + 60 * Math.sin((k + 1) * Math.PI / 4)}%)">`).join('')}
       <div class="h-ring" style="border-width:${Math.max(1.5, S * 0.012)}px"></div>
       ${[...Array(8)].map(() => '<i class="h-spark"></i>').join('')}
-      <img class="h-pal" src="${sprite('bronze')}" alt="Ember, bronze habit pal">`;
+      <img class="h-pal" src="${sprite('bronze')}" alt="Flick, bronze habit pal">`;
     const glow = host.querySelector('.h-glow'), egg = host.querySelector('.h-egg'), wedges = [...host.querySelectorAll('.h-wedge')], ring = host.querySelector('.h-ring'), sparks = [...host.querySelectorAll('.h-spark')], pal = host.querySelector('.h-pal');
     let revealed = false;
     clock(HATCH_MS, (t) => {
@@ -479,7 +480,7 @@
       <div class="e-coat" style="${mask(sprite(oldKey))}background:${body}"></div>
       <div class="e-gloss" style="${mask(sprite(oldKey))}background:${hi}"></div>
       <div class="e-white" style="${mask(sprite(oldKey))}background:${hi}"></div>
-      <img class="e-new" src="${sprite(tier.key)}" alt="Ember, ${tier.key} habit pal">
+      <img class="e-new" src="${sprite(tier.key)}" alt="Flick, ${tier.key} habit pal">
       ${[...Array(v.shards)].map(() => `<i class="e-shard" style="background:${hi}"></i>`).join('')}`;
     const halo = host.querySelector('.e-halo'), old = host.querySelector('.e-old'), coat = host.querySelector('.e-coat'), gloss = host.querySelector('.e-gloss'), white = host.querySelector('.e-white'), nu = host.querySelector('.e-new'), shards = [...host.querySelectorAll('.e-shard')];
     const shardAng = shards.map((_, k) => (k / shards.length) * Math.PI * 2 + rand(-0.2, 0.2)), shardR = shards.map(() => rand(0.55, 0.91));
