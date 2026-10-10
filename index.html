@@ -452,7 +452,13 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 /* ---------- TikTok in-app note ---------- */
 .tt-note { display: none; margin: 0 0 24px; padding: 18px 20px; border-radius: 18px; background: #FFE9B8; border: 2px solid #F0B429; color: #4A3200; font-size: 17px; line-height: 1.5; max-width: 520px; box-shadow: 0 12px 30px -14px rgba(120, 80, 0, 0.5); }
 @media (prefers-color-scheme: dark) { .tt-note { background: #3A2E12; border-color: #C9931E; color: #FFE9B8; } }
-.tt-note b { display: block; font-family: 'Inter Tight'; font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; }
+.tt-note b { display: block; font-family: 'Inter Tight'; font-size: 26px; letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.1; }
+.tt-note .tt-text { font-size: 15.5px; color: #5A4100; }
+@media (prefers-color-scheme: dark) { .tt-note .tt-text { color: #F3DCA6; } }
+.tt-btn { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 12px; padding: 16px 20px; border-radius: 16px; background: #141218; color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.55); }
+.tt-btn svg { width: 22px; height: 22px; }
+.tt-btn:active { transform: scale(0.98); }
+@media (prefers-color-scheme: dark) { .tt-btn { background: #fff; color: #000; } }
 .tt-note kbd { font: inherit; font-weight: 800; background: #fff; color: #141218; border: 1px solid rgba(0,0,0,0.15); border-radius: 8px; padding: 2px 9px; white-space: nowrap; }
 .tt-arrow { display: none; position: fixed; top: 10px; right: 12px; z-index: 200; align-items: center; gap: 4px; background: #F0B429; color: #2A1D00; font-weight: 900; font-size: 15px; padding: 8px 12px; border-radius: 999px; box-shadow: 0 10px 24px -8px rgba(0,0,0,0.45); animation: ttnudge 1.1s ease-in-out infinite; pointer-events: none; }
 .tt-arrow svg { width: 18px; height: 18px; }
@@ -538,7 +544,7 @@ body.in-tiktok .nav-cta, body.in-tiktok .sticky-cta { display: none !important; 
       <div class="pill"><img src="assets/tiers/gold.webp" alt=""><span data-i18n="hero.pill">A new habit pal every day</span></div>
       <h1 data-i18n-html="hero.h1">Build habits. <span class="grad">Earn a pal every day.</span></h1>
       <p class="hero-sub" data-i18n="hero.sub">Improve is a habit tracker and planner in one. Finish your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.</p>
-      <div class="tt-note" id="tt-note" role="note" data-i18n-html="tt.note"><b>Opening from TikTok?</b> TikTok blocks App Store links in its browser. Tap the <kbd>•••</kbd> menu, choose <kbd>Open in browser</kbd>, then tap Download.</div>
+      <div class="tt-note" id="tt-note" role="note"><div class="tt-text" data-i18n-html="tt.note"><b>Opening from TikTok?</b> TikTok blocks App Store links in its browser. Tap the <kbd>•••</kbd> menu, choose <kbd>Open in browser</kbd>, then tap Download.</div><a class="tt-btn" href="x-safari-https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-safari&mt=8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span data-i18n="tt.open_safari">Open in Safari</span></a></div>
       <div class="hero-actions">
         <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store" data-i18n-aria="store.aria">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -863,7 +869,11 @@ body.in-tiktok .nav-cta, body.in-tiktok .sticky-cta { display: none !important; 
   const $ = id => document.getElementById(id);
   const langSel = $('lang-select');
   langSel.addEventListener('change', () => { try { localStorage.setItem('lang', langSel.value); } catch (e) {} const u = new URL(location.href); u.searchParams.set('lang', langSel.value); location.href = u.toString(); });
-  if (/musical_ly|TikTok|Bytedance/i.test(navigator.userAgent)) document.body.classList.add('in-tiktok');
+  if (/musical_ly|TikTok|Bytedance/i.test(navigator.userAgent)) {
+    document.body.classList.add('in-tiktok');
+    const lift = () => { const note = $('tt-note'), b = note && note.querySelector('.tt-text > b'); if (b) note.insertBefore(b, note.firstChild); };
+    if (window.I18N_READY) lift(); else addEventListener('i18n:ready', lift, { once: true });
+  }
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Nav
