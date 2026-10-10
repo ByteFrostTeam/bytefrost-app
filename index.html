@@ -19,6 +19,7 @@
     }
   })();
 </script>
+<script src="assets/demo.js" defer></script>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -211,53 +212,49 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
   width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer;
   font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line);
   border-radius: 20px; padding: 12px 14px 12px 12px; margin-bottom: 10px; position: relative; overflow: hidden;
-  transition: transform 0.35s var(--spring), border-color 0.2s;
+  transform-origin: center; transition: height 0.3s ease, margin 0.3s ease, opacity 0.3s;
 }
-.goal:hover { transform: translateY(-1px); }
-.goal:active { transform: scale(0.98); }
-.goal::before {
-  content: ''; position: absolute; inset: 0; transform-origin: left; transform: scaleX(0);
-  background: var(--fill); opacity: 0.9; transition: transform 0.7s var(--spring);
-}
-.goal.done::before { transform: scaleX(1); }
+.goal.collapsing { opacity: 0; transition: height 0.3s ease, margin 0.3s ease, opacity 0.12s; }
+.goal.entering { opacity: 0; transform: translateY(-14px); }
 .goal > * { position: relative; }
-.goal-icon {
-  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-  box-shadow: 0 4px 10px -4px rgba(60, 20, 90, 0.45);
-}
+.goal-fill { position: absolute !important; inset: 0 auto 0 0; width: 0; opacity: 0.92; }
+.goal-shine { position: absolute !important; top: -20%; bottom: -20%; left: 0; width: 46px; opacity: 0; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.85), rgba(255,255,255,0)); pointer-events: none; }
+.goal-iconwrap { position: relative; width: 44px; height: 44px; flex-shrink: 0; }
+.goal-icon { width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 4px 10px -4px rgba(60, 20, 90, 0.45); display: block; }
+.goal-done-dot { position: absolute; top: -2px; right: -2px; width: 16px; height: 16px; border-radius: 50%; background: #2ECC71; border: 2px solid var(--surface); display: none; place-items: center; }
+.goal-done-dot svg { width: 9px; height: 9px; }
+.goal.done .goal-done-dot { display: grid; }
 .goal-text { flex: 1; min-width: 0; }
 .goal-text b { display: block; font-weight: 600; font-size: 16px; }
-.goal-text small { font-size: 13px; color: var(--ink-3); font-weight: 500; transition: color 0.3s; }
+.goal-text small { font-size: 13px; color: var(--ink-3); font-weight: 500; }
 .goal.done .goal-text { color: #fff; }
 .goal.done .goal-text small { color: rgba(255, 255, 255, 0.85); }
-.goal-pts {
-  font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: 10px;
-  background: var(--surface); box-shadow: var(--shadow); white-space: nowrap; display: flex; gap: 4px; align-items: center;
+.goal-badge {
+  position: relative; display: inline-flex; align-items: center; gap: 5px; overflow: hidden;
+  font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: 10px; white-space: nowrap;
+  background: var(--surface); border: 1.5px solid var(--line); box-shadow: var(--shadow); font-variant-numeric: tabular-nums;
 }
-.goal-check {
-  width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--ink-3); flex-shrink: 0;
-  display: grid; place-items: center; transition: all 0.3s var(--spring);
-}
-.goal-check svg { width: 14px; height: 14px; color: #fff; opacity: 0; transform: scale(0.4); transition: all 0.3s var(--spring); }
-.goal.done .goal-check { background: rgba(255, 255, 255, 0.28); border-color: #fff; }
-.goal.done .goal-check svg { opacity: 1; transform: scale(1); }
+.goal-badge-tint { position: absolute; inset: 0; background: rgba(74, 222, 128, 0.45); opacity: 0; }
+.goal-badge-shimmer { position: absolute; top: -10px; bottom: -10px; left: 0; width: 32px; opacity: 0; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.55), rgba(255,255,255,0)); transform: translateX(-60px); }
+.goal-badge-icon { width: 14px; height: 14px; color: #FFD700; position: relative; }
+.goal-badge-icon svg { width: 100%; height: 100%; fill: currentColor; display: block; }
+.goal.done .goal-badge-icon { color: var(--ink); filter: drop-shadow(0 0 3px rgba(46, 204, 113, 0.9)); }
+.goal-badge-n { position: relative; }
+.goals-done-wrap { display: none; margin-top: 18px; }
+.goals-done-wrap.has-done { display: block; }
+.goals-done-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+#goals-done .goal { opacity: 0.72; }
+#goals-done .goal.entering { opacity: 0; }
 .demo-hint { font-size: 14px; color: var(--ink-3); margin-top: 18px; }
 .demo-reset { background: none; border: none; font: inherit; color: var(--violet); font-weight: 600; cursor: pointer; padding: 0; }
 
 .demo-stage {
   position: relative; padding: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background:
-    radial-gradient(60% 50% at 50% 45%, var(--glow, rgba(124, 77, 255, 0.10)), transparent 70%),
-    var(--bg-2);
-  transition: --glow 0.6s;
-  min-height: 560px;
+  background: var(--bg-2); min-height: 560px;
 }
-.dome {
-  position: relative; width: 260px; height: 300px; display: flex; align-items: flex-end; justify-content: center;
-}
+.dome { position: relative; width: 260px; height: 300px; display: flex; align-items: flex-end; justify-content: center; }
 .dome-glass {
-  position: absolute; left: 22px; right: 22px; top: 0; bottom: 34px;
-  border-radius: 110px 110px 18px 18px;
+  position: absolute; left: 22px; right: 22px; top: 0; bottom: 34px; border-radius: 110px 110px 18px 18px;
   background: linear-gradient(115deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 28%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.18) 100%);
   box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.65), inset 0 -20px 40px rgba(255, 255, 255, 0.12), 0 20px 50px -20px rgba(40, 20, 80, 0.25);
   z-index: 3; pointer-events: none;
@@ -265,43 +262,68 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
 @media (prefers-color-scheme: dark) {
   .dome-glass { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.28), inset 0 -20px 40px rgba(255, 255, 255, 0.05); background: linear-gradient(115deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02) 30%, transparent 60%, rgba(255, 255, 255, 0.06)); }
 }
-.dome-base {
-  position: absolute; bottom: 0; left: 6px; right: 6px; height: 48px; border-radius: 50%;
-  background: linear-gradient(180deg, var(--base-top, #5b5866), var(--base-bot, #2c2a33));
-  box-shadow: 0 18px 30px -10px rgba(0, 0, 0, 0.35), inset 0 3px 0 rgba(255, 255, 255, 0.25);
-  transition: background 0.6s;
-  z-index: 1;
-}
-.dome-pal {
-  position: absolute; bottom: 30px; width: 190px; height: 190px; z-index: 2;
-  transition: transform 0.6s var(--spring);
-}
+.dome-base { position: absolute; bottom: 0; left: 6px; right: 6px; height: 48px; border-radius: 50%; box-shadow: 0 18px 30px -10px rgba(0, 0, 0, 0.35), inset 0 3px 0 rgba(255, 255, 255, 0.25); z-index: 1; overflow: hidden; }
+.dome-base-swap { position: absolute; inset: 0; opacity: 0; }
+.dome-pal { position: absolute; bottom: 30px; width: 190px; height: 190px; z-index: 2; transform-origin: 50% 85%; }
 .dome-pal img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .dome-pal .blink { opacity: 0; }
 .dome-pal.blinking .blink { opacity: 1; }
-.dome-pal.pop { animation: pop 0.75s var(--spring); }
-@keyframes pop { 0% { transform: scale(0.6) translateY(20px); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
-.dome-pal.wiggle { animation: wiggle 0.5s ease; }
-@keyframes wiggle { 0%, 100% { rotate: 0deg; } 25% { rotate: -6deg; } 75% { rotate: 6deg; } }
-
+.dome-pal.blinking #pal-img { opacity: 0; }
 .score { text-align: center; margin-top: 26px; }
-.score-pts { font-family: 'Inter Tight'; font-weight: 800; font-size: 56px; letter-spacing: -0.04em; line-height: 1; color: var(--tier-color, var(--ink)); transition: color 0.4s; font-variant-numeric: tabular-nums; }
+.score-pts { font-family: 'Inter Tight'; font-weight: 800; font-size: 56px; letter-spacing: -0.04em; line-height: 1; color: var(--tier-color, var(--ink)); transition: color 0.4s; font-variant-numeric: tabular-nums; display: inline-block; transform-origin: center; }
 .score-pts small { font-size: 22px; font-weight: 700; margin-left: 4px; }
 .score-tier { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); margin-top: 8px; }
 .score-next { font-size: 15px; color: var(--ink-3); margin-top: 4px; min-height: 22px; }
-.bar { width: 280px; max-width: 100%; height: 10px; border-radius: 99px; background: var(--line); margin-top: 18px; position: relative; overflow: visible; }
-.bar-fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--bronze), #E9B44C 60%, var(--gold)); transition: width 0.8s var(--spring); }
+.bar { width: 280px; max-width: 100%; height: 10px; border-radius: 99px; background: var(--line); margin-top: 18px; position: relative; }
+.bar-fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; }
 .bar-mark { position: absolute; top: -5px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); display: grid; place-items: center; }
 .bar-mark img { width: 16px; height: 16px; filter: grayscale(1) opacity(0.5); transition: filter 0.4s; }
 .bar-mark.hit img { filter: none; }
-.celebrate-msg {
-  position: absolute; top: 28px; left: 50%; transform: translate(-50%, -12px); opacity: 0;
-  background: var(--ink); color: var(--bg); font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: 999px; white-space: nowrap;
-  transition: all 0.5s var(--spring); pointer-events: none;
+
+/* flying layers (chip, trophies, icons) and confetti canvas */
+.fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 120; }
+#fly > * { position: absolute; left: 0; top: 0; will-change: transform; }
+.fly-chip { background: linear-gradient(90deg, #FFD700, #FFB800); color: #4A2E00; font-weight: 800; font-size: 14px; padding: 5px 12px; border-radius: 999px; box-shadow: 0 6px 16px -6px rgba(0,0,0,0.4); white-space: nowrap; }
+.fly-dot { border-radius: 50%; background: #FFD700; }
+.fly-trophy { transform-style: preserve-3d; }
+.fly-trophy span { position: absolute; inset: 0; }
+.fly-trophy svg { width: 100%; height: 100%; fill: currentColor; display: block; }
+.fly-trophy .tr-glint { color: #fff; opacity: 0; }
+.fly-trophy.ghost { opacity: 0; }
+.fly-icon { width: 44px; height: 44px; border-radius: 50%; }
+
+/* tier ceremony takeover */
+main { transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.42s; transform-origin: 50% 40vh; }
+main.receded { transform: scale(0.955); border-radius: 28px; overflow: hidden; }
+.ceremony { position: fixed; inset: 0; z-index: 110; cursor: pointer; }
+.cer-dim, .cer-bloom { position: absolute; inset: 0; opacity: 0; }
+.cer-flight { position: absolute; left: 0; top: 0; will-change: transform; }
+.cer-flight > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cer-pal { object-fit: contain; }
+.cer-caption {
+  position: absolute; left: 50%; top: calc(50% + 120px); transform: translate(-50%, 12px); opacity: 0;
+  background: rgba(20, 20, 28, 0.88); color: #fff; border-radius: 30px; padding: 16px 28px; text-align: center;
+  transition: opacity 0.25s ease, transform 0.25s ease; max-width: calc(100vw - 48px);
 }
-.celebrate-msg.show { opacity: 1; transform: translate(-50%, 0); }
-.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
-.confetti i { position: absolute; width: 8px; height: 12px; border-radius: 2px; top: 40%; left: 50%; opacity: 0; }
+.cer-caption.show { opacity: 1; transform: translate(-50%, 0); }
+.cer-title { font-family: 'Inter Tight'; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; line-height: 1.05; }
+.cer-sub { font-size: 16px; color: rgba(255, 255, 255, 0.85); margin-top: 6px; }
+.cer-hint { position: absolute; left: 0; right: 0; bottom: 40px; text-align: center; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500; opacity: 0; transition: opacity 0.4s; }
+.cer-hint.show { opacity: 1; }
+/* hatch */
+.h-glow { border-radius: 50%; background: radial-gradient(circle, rgba(255, 231, 173, 0.9), rgba(255, 231, 173, 0) 70%); opacity: 0; transform: scale(1.4); }
+.h-egg, .h-wedge, .h-pal { object-fit: contain; transform-origin: 50% 85%; }
+.h-wedge { opacity: 0; }
+.h-pal { opacity: 0; }
+.h-ring { position: absolute; left: 50% !important; top: 50% !important; width: 120% !important; height: 120% !important; border-radius: 50%; border: 2px solid #F5CB74; opacity: 0; }
+.h-spark { position: absolute; left: 50% !important; top: 50% !important; width: 7px !important; height: 7px !important; margin: -3.5px; border-radius: 50%; background: #F7D997; opacity: 0; }
+/* evolution */
+.e-halo { position: absolute; left: 50% !important; top: 50% !important; width: 160% !important; height: 160% !important; border-radius: 50%; opacity: 0; }
+.e-old, .e-new { object-fit: contain; transform-origin: 50% 85%; }
+.e-new { opacity: 0; }
+.e-coat, .e-gloss, .e-white { opacity: 1; transform-origin: 50% 85%; }
+.e-gloss, .e-white { opacity: 0; }
+.e-shard { position: absolute; left: 50% !important; top: 50% !important; width: 6px !important; height: 6px !important; margin: -3px; border-radius: 2px; opacity: 0; }
 
 /* ---------- Steps ---------- */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
@@ -443,8 +465,13 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   .hero-quote { margin-left: auto; margin-right: auto; }
   .hero-visual { min-height: 0; margin-top: 30px; }
   .demo { grid-template-columns: 1fr; }
-  .demo-goals { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
-  .demo-stage { min-height: 500px; padding: 40px 24px; }
+  .demo-goals { border-right: none; padding: 28px 20px 24px; }
+  .demo-stage { order: -1; min-height: 0; padding: 32px 20px 28px; border-bottom: 1px solid var(--line); }
+  .dome { width: 200px; height: 230px; }
+  .dome-pal { width: 150px; height: 150px; bottom: 24px; }
+  .score { margin-top: 18px; }
+  .score-pts { font-size: 44px; }
+  .cer-title { font-size: 32px; }
   .steps { grid-template-columns: 1fr; gap: 28px; }
   .span-4, .span-3, .span-2 { grid-column: span 6; }
   .card-split { grid-template-columns: 1fr; }
@@ -550,11 +577,10 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
         <h3>Today</h3>
         <p>Harder goals earn more trophies.</p>
         <div id="goals"></div>
+        <div class="goals-done-wrap"><div class="goals-done-label">Completed</div><div id="goals-done"></div></div>
         <p class="demo-hint">30 trophies earns bronze, 60 silver, 90 gold. <button class="demo-reset" id="reset" type="button">Start over</button></p>
       </div>
       <div class="demo-stage" id="stage">
-        <div class="celebrate-msg" id="msg"></div>
-        <div class="confetti" id="confetti"></div>
         <div class="dome">
           <div class="dome-base" id="base"></div>
           <div class="dome-pal" id="pal">
@@ -569,9 +595,9 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
           <div class="score-next" id="next">30 pts to Bronze</div>
         </div>
         <div class="bar"><div class="bar-fill" id="bar"></div>
-          <div class="bar-mark" style="left:30%" data-at="30"><img src="assets/tiers/bronze.webp" alt=""></div>
-          <div class="bar-mark" style="left:60%" data-at="60"><img src="assets/tiers/silver.webp" alt=""></div>
-          <div class="bar-mark" style="left:90%" data-at="90"><img src="assets/tiers/gold.webp" alt=""></div>
+          <div class="bar-mark" style="left:33.3%" data-at="30"><img src="assets/tiers/bronze.webp" alt=""></div>
+          <div class="bar-mark" style="left:66.6%" data-at="60"><img src="assets/tiers/silver.webp" alt=""></div>
+          <div class="bar-mark" style="left:100%" data-at="90"><img src="assets/tiers/gold.webp" alt=""></div>
         </div>
       </div>
     </div>
@@ -814,6 +840,10 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   </div>
 </footer>
 
+<canvas id="fx" class="fx-layer" aria-hidden="true"></canvas>
+<div id="fly" class="fx-layer" aria-hidden="true"></div>
+<div id="ceremony" class="ceremony" hidden></div>
+
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -865,117 +895,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
       : `<div style="--t:${tierColor[t]}"><img src="assets/pals/${id}-gold.webp" alt="${name}, ${t}" loading="lazy"></div>`;
   }).join('');
 
-  // ---------- Interactive demo ----------
-  const GOALS = [
-    { icon: 'drinkwater', name: 'Drink water', sub: '8 glasses · Easy', pts: 10, fill: 'linear-gradient(90deg,#0284C7,#38BDF8)' },
-    { icon: 'meditate', name: 'Meditate', sub: '10 minutes · Moderate', pts: 25, fill: 'linear-gradient(90deg,#7C3AED,#A78BFA)' },
-    { icon: 'read', name: 'Read daily', sub: '15 minutes · Moderate', pts: 25, fill: 'linear-gradient(90deg,#0E7490,#06B6D4)' },
-    { icon: 'run', name: 'Daily run', sub: '20 minutes · Challenging', pts: 40, fill: 'linear-gradient(90deg,#E11D48,#FB7185)' },
-  ];
-  const TIERS = [
-    { at: 0, key: 'none', label: 'Egg', color: 'var(--ink)', base: ['#5b5866', '#2c2a33'], glow: 'rgba(124,77,255,0.10)' },
-    { at: 30, key: 'bronze', label: 'Bronze habit pal', color: '#CD7F32', base: ['#E3A06A', '#8A4E1C'], glow: 'rgba(205,127,50,0.22)', msg: 'Bronze. Your habit pal has arrived.' },
-    { at: 60, key: 'silver', label: 'Silver habit pal', color: '#9A9A9A', base: ['#E6E6E6', '#8C8C8C'], glow: 'rgba(170,170,190,0.25)', msg: 'Silver. Your pal is growing.' },
-    { at: 90, key: 'gold', label: 'Gold habit pal', color: '#E8A300', base: ['#FFE07A', '#B8860B'], glow: 'rgba(255,190,0,0.28)', msg: "Gold. That's a perfect day." },
-  ];
-  const goalsEl = document.getElementById('goals');
-  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
-  goalsEl.innerHTML = GOALS.map((g, i) => `
-    <button class="goal" type="button" data-i="${i}" style="--fill:${g.fill}" aria-pressed="false">
-      <img class="goal-icon" src="assets/icons/${g.icon}.webp" alt="" width="44" height="44">
-      <span class="goal-text"><b>${g.name}</b><small>${g.sub}</small></span>
-      <span class="goal-pts"><img src="assets/tiers/gold.webp" alt="" width="14" height="14">${g.pts}</span>
-      <span class="goal-check">${check}</span>
-    </button>`).join('');
-
-  const done = new Set();
-  let shown = 0, tierIdx = 0;
-  const pal = $('pal'), palImg = $('pal-img'), palBlink = $('pal-blink');
-
-  // Preload stages
-  ['bronze', 'silver', 'gold'].forEach(t => { new Image().src = `assets/pals/ember-stage-${t}.webp`; new Image().src = `assets/pals/ember-stage-${t}-blink.webp`; });
-
-  function tierFor(p) { let t = 0; TIERS.forEach((x, i) => { if (p >= x.at) t = i; }); return t; }
-
-  function animateCount(to) {
-    const from = shown, start = performance.now(), dur = reduced ? 0 : 600;
-    const step = now => {
-      const k = dur ? Math.min(1, (now - start) / dur) : 1;
-      shown = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3)));
-      $('pts').innerHTML = shown + '<small>pts</small>';
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  function confetti(color) {
-    if (reduced) return;
-    const box = $('confetti'); box.innerHTML = '';
-    const colors = [color, '#7C4DFF', '#FF5E62', '#38BDF8', '#34D399', '#FFD27A'];
-    for (let i = 0; i < 44; i++) {
-      const c = document.createElement('i');
-      c.style.background = colors[i % colors.length];
-      box.appendChild(c);
-      const a = Math.random() * Math.PI * 2, d = 140 + Math.random() * 220;
-      c.animate([
-        { opacity: 1, transform: 'translate(-50%,-50%) rotate(0deg)' },
-        { opacity: 1, offset: 0.7 },
-        { opacity: 0, transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d * 0.8 + 120}px)) rotate(${Math.random() * 720}deg)` },
-      ], { duration: 1200 + Math.random() * 600, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
-    }
-  }
-
-  function render(fromClick) {
-    const total = [...done].reduce((s, i) => s + GOALS[i].pts, 0);
-    const t = tierFor(total), tier = TIERS[t];
-    animateCount(total);
-    $('bar').style.width = Math.min(100, total) + '%';
-    document.querySelectorAll('.bar-mark').forEach(m => m.classList.toggle('hit', total >= +m.dataset.at));
-    $('tier').textContent = tier.label;
-    $('pts').style.setProperty('--tier-color', tier.color);
-    const nextT = TIERS[t + 1];
-    $('next').textContent = nextT ? `${nextT.at - total} pts to ${nextT.key[0].toUpperCase() + nextT.key.slice(1)}` : 'Gold achieved!';
-    $('base').style.setProperty('--base-top', tier.base[0]);
-    $('base').style.setProperty('--base-bot', tier.base[1]);
-    $('stage').style.setProperty('--glow', tier.glow);
-
-    if (t !== tierIdx) {
-      palImg.src = `assets/pals/ember-stage-${tier.key}.webp`;
-      palImg.alt = tier.key === 'none' ? "Today's habit pal, still an egg" : `Ember, ${tier.label.toLowerCase()}`;
-      palBlink.src = `assets/pals/ember-stage-${tier.key === 'none' ? 'bronze' : tier.key}-blink.webp`;
-      pal.classList.remove('pop', 'wiggle'); void pal.offsetWidth; pal.classList.add('pop');
-      if (fromClick && t > tierIdx) {
-        confetti(tier.color);
-        const msg = $('msg'); msg.textContent = tier.msg; msg.classList.add('show');
-        clearTimeout(msg._t); msg._t = setTimeout(() => msg.classList.remove('show'), 2200);
-      }
-      tierIdx = t;
-    } else if (fromClick) {
-      pal.classList.remove('pop', 'wiggle'); void pal.offsetWidth; pal.classList.add('wiggle');
-    }
-  }
-
-  goalsEl.addEventListener('click', e => {
-    const b = e.target.closest('.goal'); if (!b) return;
-    const i = +b.dataset.i;
-    done.has(i) ? done.delete(i) : done.add(i);
-    b.classList.toggle('done', done.has(i));
-    b.setAttribute('aria-pressed', done.has(i));
-    render(true);
-  });
-  $('reset').addEventListener('click', () => {
-    done.clear();
-    document.querySelectorAll('.goal').forEach(b => { b.classList.remove('done'); b.setAttribute('aria-pressed', 'false'); });
-    render(false);
-  });
-
-  // Demo pal blinks too (only once hatched)
-  if (!reduced) setInterval(() => {
-    if (tierIdx === 0) return;
-    pal.classList.add('blinking'); setTimeout(() => pal.classList.remove('blinking'), 140);
-  }, 3200);
-
-  render(false);
 })();
 </script>
 </body>
