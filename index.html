@@ -442,6 +442,12 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 }
 @media (max-width: 960px) { .sticky-cta { display: flex; } }
 
+/* ---------- TikTok in-app note ---------- */
+.tt-note { display: none; margin: 0 0 20px; padding: 12px 16px; border-radius: 14px; background: #FFF3D6; color: #6B4A00; font-size: 14px; line-height: 1.45; max-width: 520px; }
+@media (prefers-color-scheme: dark) { .tt-note { background: #3A2E12; color: #FFE4A8; } }
+.tt-note kbd { font: inherit; font-weight: 700; }
+body.in-tiktok .tt-note { display: block; }
+
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.9s var(--spring); }
 .reveal.in { opacity: 1; transform: none; }
@@ -525,6 +531,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
         </a>
         <a href="#how" class="link-arrow">Try it right here <span>→</span></a>
       </div>
+      <div class="tt-note" id="tt-note" role="note"><b>Opening from TikTok?</b> TikTok blocks App Store links in its browser. Tap the <kbd>•••</kbd> menu, choose <kbd>Open in browser</kbd>, then tap Download.</div>
       <div class="hero-meta">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free on iPhone</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works with Apple Health</span>
@@ -837,6 +844,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = id => document.getElementById(id);
+  if (/musical_ly|TikTok|Bytedance/i.test(navigator.userAgent)) document.body.classList.add('in-tiktok');
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Nav

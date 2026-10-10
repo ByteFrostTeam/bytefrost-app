@@ -24,6 +24,11 @@
   @media (prefers-color-scheme: dark) { .btn { background: #fff; color: #000; } }
   .meta { display: flex; justify-content: center; gap: 14px; margin-top: 16px; font-size: 13px; color: #8A8592; font-weight: 500; }
   .more { display: inline-block; margin-top: 28px; font-size: 14px; color: #7C4DFF; text-decoration: none; font-weight: 600; }
+  .tt { display: none; margin: 0 0 22px; padding: 14px 16px; border-radius: 16px; background: #FFF3D6; color: #6B4A00; text-align: left; font-size: 15px; line-height: 1.45; }
+  @media (prefers-color-scheme: dark) { .tt { background: #3A2E12; color: #FFE4A8; } }
+  .tt b { display: block; margin-bottom: 4px; }
+  .tt kbd { font: inherit; font-weight: 700; }
+  body.in-tiktok .tt { display: block; }
 </style>
 </head>
 <body>
@@ -31,12 +36,26 @@
     <img class="icon" src="../assets/improve-icon.png" alt="">
     <h1>Improve: Habit Tracker</h1>
     <p>Build habits, earn a habit pal every day. Free on iPhone.</p>
-    <a class="btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=bio-link&mt=8">
+    <div class="tt" role="note"><b>Opening from TikTok?</b>TikTok blocks App Store links inside its browser. Tap the <kbd>•••</kbd> menu at the top right, choose <kbd>Open in browser</kbd>, then tap Download.</div>
+    <a class="btn" id="dl" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=bio-link&mt=8">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       Download on the App Store
     </a>
     <div class="meta"><span>Free</span><span>·</span><span>iPhone</span><span>·</span><span>30 languages</span></div>
     <a class="more" href="../">See how it works →</a>
   </main>
+  <script>
+    // TikTok's in-app browser refuses apps.apple.com; some builds pass the itms-appss scheme through.
+    var inTikTok = /musical_ly|TikTok|Bytedance/i.test(navigator.userAgent);
+    if (inTikTok) {
+      document.body.classList.add('in-tiktok');
+      document.getElementById('dl').addEventListener('click', function (e) {
+        e.preventDefault();
+        var https = this.href;
+        location.href = 'itms-appss://apps.apple.com/app/id6757102859';
+        setTimeout(function () { location.href = https; }, 1200);
+      });
+    }
+  </script>
 </body>
 </html>
