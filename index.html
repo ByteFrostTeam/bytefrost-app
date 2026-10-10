@@ -8,17 +8,6 @@
 <meta name="theme-color" content="#F5F1EA" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D0C10" media="(prefers-color-scheme: dark)">
 <meta name="apple-itunes-app" content="app-id=6757102859">
-<script>
-  // Visitors arriving from the TikTok bio on an iPhone already saw the pitch; send them straight to the store.
-  (function () {
-    var ua = navigator.userAgent || '';
-    var inTikTok = /musical_ly|TikTok|Bytedance|ByteLocale/i.test(ua);
-    var onIOS = /iPhone|iPad|iPod/.test(ua);
-    if (inTikTok && onIOS && !/[?&]stay/.test(location.search)) {
-      location.replace('https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-inapp&mt=8');
-    }
-  })();
-</script>
 <script src="assets/demo.js" defer></script>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
