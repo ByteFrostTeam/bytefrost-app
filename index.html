@@ -375,43 +375,6 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
 .final-card .store-btn { background: #fff; color: #000; }
 .final-card .group { width: min(820px, 100%); margin: 56px auto -6px; filter: drop-shadow(0 -10px 40px rgba(0, 0, 0, 0.25)); }
 
-/* ---------- More from ByteFrost (Average) ---------- */
-.more { padding-top: 0; }
-.avg-card {
-  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: stretch;
-  background: linear-gradient(160deg, #0B1020 0%, #111A36 60%, #0B1020 100%); color: #fff;
-  border-radius: 40px; padding: 56px 56px 0; overflow: hidden; position: relative; box-shadow: var(--shadow-lg);
-}
-.avg-card::before { content: ''; position: absolute; width: 600px; height: 600px; left: 40%; top: -30%; background: radial-gradient(circle, rgba(72, 110, 255, 0.35), transparent 65%); pointer-events: none; }
-.avg-copy { position: relative; padding-bottom: 56px; }
-.avg-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-.avg-brand img { width: 52px; height: 52px; border-radius: 13px; box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.6); }
-.avg-brand b { display: block; font-size: 16px; }
-.avg-brand small { font-size: 13px; color: rgba(255, 255, 255, 0.6); }
-.avg-copy h3 { font-size: clamp(30px, 3.6vw, 42px); font-weight: 800; margin-bottom: 14px; }
-.avg-copy p { color: rgba(255, 255, 255, 0.78); font-size: 17px; max-width: 480px; }
-.avg-copy ul { list-style: none; margin: 22px 0 30px; display: grid; gap: 10px; color: rgba(255, 255, 255, 0.88); font-size: 15px; }
-.avg-copy li::before { content: '✓'; color: #7DA2FF; font-weight: 700; margin-right: 10px; }
-.avg-copy .store-btn { background: #fff; color: #000; border-color: transparent; }
-.avg-shots { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 18px; }
-.avg-shots .phone { width: 240px; margin-bottom: -70px; transform: none; }
-.avg-shots .phone img { object-position: top; }
-.avg-shots .phone + .phone { margin-bottom: -150px; }
-.avg-note { font-size: 13px; color: var(--ink-3); text-align: center; margin-top: 20px; }
-@media (max-width: 960px) {
-  .avg-card { grid-template-columns: 1fr; padding: 40px 28px 0; }
-  .avg-copy { padding-bottom: 0; }
-  .avg-shots { margin-top: 36px; }
-  .avg-shots .phone { width: 180px; margin-bottom: -60px; }
-  .avg-shots .phone + .phone { margin-bottom: -120px; }
-}
-@media (max-width: 640px) {
-  .avg-card { border-radius: 32px; padding: 32px 22px 0; }
-  .avg-shots .phone { width: 150px; border-radius: 30px; padding: 7px; }
-  .avg-shots .phone img { border-radius: 24px; }
-  .avg-shots .phone::after { top: 12px; width: 50px; height: 15px; }
-}
-
 /* ---------- Footer ---------- */
 footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14px; color: var(--ink-3); }
 .foot { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
@@ -501,7 +464,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
     <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#features">Features</a>
-      <a href="#average">Average</a>
       <a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta">Get the app</a>
     </div>
   </div>
@@ -750,38 +712,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   </div>
 </section>
 
-<!-- ================= MORE FROM BYTEFROST ================= -->
-<section class="section more" id="average">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">More from ByteFrost</span>
-      <h2>Are you average?</h2>
-      <p>Most people think they're above average. Most people are wrong. Our second app finds out where you really stand.</p>
-    </div>
-    <div class="avg-card reveal">
-      <div class="avg-copy">
-        <div class="avg-brand"><img src="assets/average/icon.png" alt=""><div><b>Average: Are You Normal?</b><small>Free on iPhone</small></div></div>
-        <h3>Your whole life in one score.</h3>
-        <p>Answer a few questions about money, body, activity, daily life and home. Average compares each one to real population data, for your country and worldwide, and turns it into a single score you can track over time.</p>
-        <ul>
-          <li>Real data, not vibes. Every stat cites its source.</li>
-          <li>3 minutes, no account.</li>
-          <li>Your answers never leave your phone.</li>
-        </ul>
-        <a class="store-btn" href="https://apps.apple.com/us/app/average-are-you-normal/id6794375122?pt=128383444&ct=web-average&mt=8" aria-label="Download Average on the App Store">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span><small>Download on the</small><strong>App Store</strong></span>
-        </a>
-      </div>
-      <div class="avg-shots">
-        <div class="phone"><img src="assets/average/share.webp" alt="Average app report with a life score of 88 and a category chart" width="645" height="1217" loading="lazy"></div>
-        <div class="phone"><img src="assets/average/categories.webp" alt="Average app category scores for money, body, activity, daily life and home" width="645" height="1276" loading="lazy"></div>
-      </div>
-    </div>
-    <p class="avg-note">Average is for entertainment and informational purposes. It is not medical or financial advice.</p>
-  </div>
-</section>
-
 </main>
 
 <div class="sticky-cta" id="sticky" aria-hidden="true">
@@ -799,10 +729,10 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
       </div>
       <div class="foot-cols">
         <div>
-          <h4>Apps</h4>
+          <h4>App</h4>
           <ul>
-            <li><a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-links&mt=8">Improve: Habit Tracker</a></li>
-            <li><a href="https://apps.apple.com/us/app/average-are-you-normal/id6794375122?pt=128383444&ct=web-links&mt=8">Average: Are You Normal?</a></li>
+            <li><a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-links&mt=8">App Store</a></li>
+            <li><a href="#how">How it works</a></li>
           </ul>
         </div>
         <div>
