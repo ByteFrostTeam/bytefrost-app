@@ -4,15 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Improve: Habit Tracker for iPhone</title>
-<meta name="description" content="A habit tracker and planner in one. Hit your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.">
+<meta name="description" content="Improve is a habit tracker and planner in one. Finish your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.">
 <meta name="theme-color" content="#F5F1EA" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D0C10" media="(prefers-color-scheme: dark)">
 <meta name="apple-itunes-app" content="app-id=6757102859">
+<script>
+  // Visitors arriving from the TikTok bio on an iPhone already saw the pitch; send them straight to the store.
+  (function () {
+    var ua = navigator.userAgent || '';
+    var inTikTok = /musical_ly|TikTok|Bytedance|ByteLocale/i.test(ua);
+    var onIOS = /iPhone|iPad|iPod/.test(ua);
+    if (inTikTok && onIOS && !/[?&]stay/.test(location.search)) {
+      location.replace('https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-inapp&mt=8');
+    }
+  })();
+</script>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bytefrost.app/">
-<meta property="og:title" content="Improve: End every day with a win">
+<meta property="og:title" content="Improve: Build habits. Earn a pal every day.">
 <meta property="og:description" content="A habit tracker and planner in one. Earn a bronze, silver or gold habit pal every day.">
 <meta property="og:image" content="https://bytefrost.app/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -141,7 +152,7 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
   margin-bottom: 28px;
 }
 .pill img { width: 26px; height: 26px; }
-.hero h1 { font-size: clamp(48px, 7.6vw, 92px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.98; }
+.hero h1 { font-size: clamp(48px, 7vw, 84px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.98; }
 .grad {
   background: linear-gradient(100deg, #5B4BFF 0%, #A24BE0 45%, #FF5E62 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -302,6 +313,18 @@ h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0
 .tier-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 5px 10px 5px 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
 .tier-chip img { width: 20px; height: 20px; }
 
+/* ---------- Reviews ---------- */
+.stars { color: #F5A623; letter-spacing: 2px; font-size: 15px; }
+.hero-quote { margin-top: 28px; max-width: 520px; }
+.hero-quote blockquote { font-size: 16px; color: var(--ink-2); margin: 6px 0 4px; line-height: 1.5; }
+.hero-quote figcaption { font-size: 13px; color: var(--ink-3); font-weight: 500; }
+.reviews { padding-top: 0; }
+.review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.review { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
+.review blockquote { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin: 14px 0 16px; }
+.review figcaption { font-size: 13px; color: var(--ink-3); font-weight: 500; }
+@media (max-width: 960px) { .review-grid { grid-template-columns: 1fr; } }
+
 /* ---------- Bento ---------- */
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
 .card {
@@ -417,6 +440,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-actions, .hero-meta { justify-content: center; }
+  .hero-quote { margin-left: auto; margin-right: auto; }
   .hero-visual { min-height: 0; margin-top: 30px; }
   .demo { grid-template-columns: 1fr; }
   .demo-goals { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
@@ -464,7 +488,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
     <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#features">Features</a>
-      <a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta">Get the app</a>
+      <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta">Download free</a>
     </div>
   </div>
 </nav>
@@ -476,10 +500,10 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   <div class="wrap hero-grid">
     <div>
       <div class="pill"><img src="assets/tiers/gold.webp" alt="">A new habit pal every day</div>
-      <h1>End every day <span class="grad">with a win.</span></h1>
-      <p class="hero-sub">Improve is a habit tracker and planner in one. Hit your goals, earn trophies, and finish each day with a bronze, silver or gold habit pal that proves you showed up.</p>
+      <h1>Build habits. <span class="grad">Earn a pal every day.</span></h1>
+      <p class="hero-sub">Improve is a habit tracker and planner in one. Finish your goals, earn trophies, and end every day with a bronze, silver or gold habit pal. Free on iPhone.</p>
       <div class="hero-actions">
-        <a class="store-btn" href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store">
+        <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <span><small>Download on the</small><strong>App Store</strong></span>
         </a>
@@ -490,6 +514,11 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works with Apple Health</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>30 languages</span>
       </div>
+      <figure class="hero-quote">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote>"The only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding."</blockquote>
+        <figcaption>Improve user, App Store review</figcaption>
+      </figure>
     </div>
 
     <div class="hero-visual">
@@ -568,6 +597,33 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
           <span class="tier-chip"><img src="assets/tiers/gold.webp" alt="">90</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Loved by people like you</span>
+      <h2>Real reviews from Improve users.</h2>
+    </div>
+    <div class="review-grid">
+      <figure class="review reveal">
+        <span class="stars">★★★★★</span>
+        <blockquote>Been looking for something like this for a few years now. The simplicity of getting started and using it daily is why this is the only habit app that has worked for me. Easy to set up, easy to use, and feels very rewarding. The clean interface is a big bonus!</blockquote>
+        <figcaption>App Store review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <span class="stars">★★★★★</span>
+        <blockquote>Great app with a clean design and easy-to-use features. It's really helped me stay consistent with my daily routines and habits. Highly recommend!</blockquote>
+        <figcaption>App Store review</figcaption>
+      </figure>
+      <figure class="review reveal">
+        <span class="stars">★★★★★</span>
+        <blockquote>Excellent app for building and maintaining good habits! It's easy and well designed. I love being motivated to track my progress so clearly. Definitely one of the best habit trackers I've tried!</blockquote>
+        <figcaption>App Store review</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -702,8 +758,8 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   <div class="wrap">
     <div class="final-card reveal">
       <h2>Start building better days.</h2>
-      <p>Your first habit pal is waiting. Hatch it today.</p>
-      <a class="store-btn" href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-footer&mt=8" aria-label="Download Improve on the App Store">
+      <p>Free on the App Store. Your first habit pal is waiting.</p>
+      <a class="store-btn" href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-footer&mt=8" aria-label="Download Improve on the App Store">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <span><small>Download on the</small><strong>App Store</strong></span>
       </a>
@@ -717,7 +773,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 <div class="sticky-cta" id="sticky" aria-hidden="true">
   <img src="assets/improve-icon.png" alt="">
   <div class="sticky-text"><b>Improve: Habit Tracker</b><small>Free on the App Store</small></div>
-  <a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-sticky&mt=8" class="sticky-btn">Get</a>
+  <a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-sticky&mt=8" class="sticky-btn">Get</a>
 </div>
 
 <footer>
@@ -731,7 +787,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
         <div>
           <h4>App</h4>
           <ul>
-            <li><a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-links&mt=8">App Store</a></li>
+            <li><a href="https://apps.apple.com/app/id6757102859?pt=128383444&ct=web-links&mt=8">App Store</a></li>
             <li><a href="#how">How it works</a></li>
           </ul>
         </div>
