@@ -428,6 +428,28 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 .foot .brand { color: var(--ink); margin-bottom: 14px; }
 .legal { margin-top: 48px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
+/* ---------- Sticky mobile CTA ---------- */
+.sticky-cta {
+  position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60;
+  display: none; align-items: center; gap: 12px;
+  padding: 10px 10px 10px 12px; padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-lg);
+  transform: translateY(120%); opacity: 0; transition: transform 0.5s var(--spring), opacity 0.3s;
+}
+.sticky-cta.show { transform: none; opacity: 1; }
+.sticky-cta img { width: 44px; height: 44px; border-radius: 11px; }
+.sticky-text { flex: 1; min-width: 0; line-height: 1.2; }
+.sticky-text b { display: block; font-size: 15px; letter-spacing: -0.01em; }
+.sticky-text small { font-size: 12.5px; color: var(--ink-3); font-weight: 500; }
+.sticky-btn {
+  background: var(--violet); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px;
+  padding: 10px 22px; border-radius: 999px; letter-spacing: 0.01em;
+  box-shadow: 0 8px 20px -8px rgba(124, 77, 255, 0.7);
+}
+@media (max-width: 960px) { .sticky-cta { display: flex; } }
+
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.9s var(--spring); }
 .reveal.in { opacity: 1; transform: none; }
@@ -453,7 +475,10 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
   .wrap { padding: 0 16px; }
   .nav-links a:not(.nav-cta) { display: none; }
   .section, .parade-section { padding: 80px 0; }
-  .hero { padding-top: 112px; }
+  .hero { padding-top: 96px; }
+  .hero h1 { font-size: 46px; }
+  .hero-sub { font-size: 17px; margin: 18px auto 24px; }
+  .hero-meta { margin-top: 28px; }
   .phone { width: 250px; border-radius: 44px; padding: 9px; }
   .phone picture, .phone img { border-radius: 36px; }
   .phone::after { top: 18px; width: 76px; height: 22px; }
@@ -487,7 +512,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
       <a href="#pals">Habit pals</a>
       <a href="#features">Features</a>
       <a href="#premium">Premium</a>
-      <a href="https://apps.apple.com/app/apple-store/id6757102859?pt=128383444&ct=website-nav&mt=8" class="nav-cta">Get the app</a>
+      <a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-nav&mt=8" class="nav-cta">Get the app</a>
     </div>
   </div>
 </nav>
@@ -502,7 +527,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
       <h1>End every day <span class="grad">with a win.</span></h1>
       <p class="hero-sub">Improve is a habit tracker and planner in one. Hit your goals, earn trophies, and finish each day with a bronze, silver or gold habit pal that proves you showed up.</p>
       <div class="hero-actions">
-        <a class="store-btn" href="https://apps.apple.com/app/apple-store/id6757102859?pt=128383444&ct=website-hero&mt=8" aria-label="Download Improve on the App Store">
+        <a class="store-btn" href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-hero&mt=8" aria-label="Download Improve on the App Store">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <span><small>Download on the</small><strong>App Store</strong></span>
         </a>
@@ -788,7 +813,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
     <div class="final-card reveal">
       <h2>Start building better days.</h2>
       <p>Your first habit pal is waiting. Hatch it today.</p>
-      <a class="store-btn" href="https://apps.apple.com/app/apple-store/id6757102859?pt=128383444&ct=website-footer&mt=8" aria-label="Download Improve on the App Store">
+      <a class="store-btn" href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-footer&mt=8" aria-label="Download Improve on the App Store">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <span><small>Download on the</small><strong>App Store</strong></span>
       </a>
@@ -798,6 +823,12 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 </section>
 
 </main>
+
+<div class="sticky-cta" id="sticky" aria-hidden="true">
+  <img src="assets/improve-icon.png" alt="">
+  <div class="sticky-text"><b>Improve: Habit Tracker</b><small>Free on the App Store</small></div>
+  <a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-sticky&mt=8" class="sticky-btn">Get</a>
+</div>
 
 <footer>
   <div class="wrap">
@@ -810,7 +841,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
         <div>
           <h4>App</h4>
           <ul>
-            <li><a href="https://apps.apple.com/app/apple-store/id6757102859?pt=128383444&ct=website-links&mt=8">App Store</a></li>
+            <li><a href="https://apps.apple.com/mn/app/improve-habit-tracker/id6757102859?pt=128383444&ct=web-links&mt=8">App Store</a></li>
             <li><a href="#how">How it works</a></li>
             <li><a href="#premium">Premium</a></li>
           </ul>
@@ -841,12 +872,20 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 <script>
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Nav
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', scrollY > 20);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Sticky download bar (mobile): appears once the hero CTA scrolls away, hides at the final CTA
+  const sticky = $('sticky'), heroBtn = document.querySelector('.hero .store-btn'), finalCard = document.querySelector('.final-card');
+  let heroGone = false, finalSeen = false;
+  const syncSticky = () => { const on = heroGone && !finalSeen; sticky.classList.toggle('show', on); sticky.setAttribute('aria-hidden', !on); };
+  new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting && e.boundingClientRect.top < 0; syncSticky(); }, { threshold: 0 }).observe(heroBtn);
+  new IntersectionObserver(([e]) => { finalSeen = e.isIntersecting; syncSticky(); }, { threshold: 0.15 }).observe(finalCard);
 
   // Reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(e => {
@@ -929,7 +968,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 64px; font-size: 14p
 
   const done = new Set();
   let shown = 0, tierIdx = 0;
-  const $ = id => document.getElementById(id);
   const pal = $('pal'), palImg = $('pal-img'), palBlink = $('pal-blink');
 
   // Preload stages
