@@ -141,5 +141,7 @@
  "get.free": "Δωρεάν",
  "get.langs": "30 γλώσσες",
  "get.more": "Δες πώς λειτουργεί →",
- "tt.open_safari": "Άνοιγμα στο Safari"
+ "tt.open_safari": "Άνοιγμα στο Safari",
+ "tt.copy": "Αντιγραφή συνδέσμου App Store",
+ "tt.copied": "Αντιγράφηκε. Επικολλήστε τον στο Safari."
 }

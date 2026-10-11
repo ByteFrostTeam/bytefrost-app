@@ -141,5 +141,7 @@
  "get.free": "Gratis",
  "get.langs": "30 sprog",
  "get.more": "Se hvordan det virker →",
- "tt.open_safari": "Åbn i Safari"
+ "tt.open_safari": "Åbn i Safari",
+ "tt.copy": "Kopiér App Store-link",
+ "tt.copied": "Kopieret. Indsæt det i Safari."
 }

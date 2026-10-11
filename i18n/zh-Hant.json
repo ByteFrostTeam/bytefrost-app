@@ -141,5 +141,7 @@
  "get.free": "免費",
  "get.langs": "30 種語言",
  "get.more": "看看如何運作 →",
- "tt.open_safari": "在 Safari 中開啟"
+ "tt.open_safari": "在 Safari 中開啟",
+ "tt.copy": "複製 App Store 連結",
+ "tt.copied": "已複製。請貼到 Safari 中。"
 }

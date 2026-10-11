@@ -33,6 +33,10 @@
   @media (prefers-color-scheme: dark) { .tt .tt-text { color: #F3DCA6; } }
   .tt-btn { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 12px; padding: 16px 20px; border-radius: 16px; background: #141218; color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.55); }
   .tt-btn svg { width: 22px; height: 22px; }
+.tt-copy { display: block; width: 100%; margin: 0 0 10px; padding: 14px 18px; border-radius: 14px; background: #fff; color: #141218; border: 1.5px solid rgba(0,0,0,0.15); font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; }
+.tt-copy.ok { background: #DFF5E6; border-color: #2ECC71; color: #14532D; }
+.tt-url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: #6B4A00; word-break: break-all; text-align: center; opacity: 0.85; }
+@media (prefers-color-scheme: dark) { .tt-copy { background: #1B1921; color: #F4F2F7; border-color: rgba(255,255,255,0.2); } .tt-url { color: #F3DCA6; } }
   @media (prefers-color-scheme: dark) { .tt-btn { background: #fff; color: #000; } }
   body.in-tiktok .icon { width: 72px; height: 72px; border-radius: 18px; margin-bottom: 14px; }
   .tt kbd { font: inherit; font-weight: 800; background: #fff; color: #141218; border: 1px solid rgba(0,0,0,0.15); border-radius: 8px; padding: 2px 9px; white-space: nowrap; }
@@ -46,7 +50,7 @@
 <body>
   <div class="tt-arrow" aria-hidden="true"><span>•••</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
   <main class="card">
-    <div class="tt" id="tt" role="note"><div class="tt-text" data-i18n-html="get.tt"><b>Opening from TikTok?</b>TikTok blocks App Store links inside its browser. Tap the <kbd>•••</kbd> menu at the top right, choose <kbd>Open in browser</kbd>, then tap Download.</div><a class="tt-btn" href="x-safari-https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-safari&mt=8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span data-i18n="tt.open_safari">Open in Safari</span></a></div>
+    <div class="tt" id="tt" role="note"><div class="tt-text" data-i18n-html="get.tt"><b>Opening from TikTok?</b>TikTok blocks App Store links inside its browser. Tap the <kbd>•••</kbd> menu at the top right, choose <kbd>Open in browser</kbd>, then tap Download.</div><a class="tt-btn" href="x-safari-https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-safari&mt=8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span data-i18n="tt.open_safari">Open in Safari</span></a><button type="button" class="tt-copy" data-i18n="tt.copy" data-url="https://apps.apple.com/app/id6757102859?pt=128383444&ct=tiktok-copy&mt=8">Copy App Store link</button><div class="tt-url">https://apps.apple.com/app/id6757102859</div></div>
     <img class="icon" src="../assets/improve-icon.png" alt="">
     <h1 data-i18n="get.h1">Improve: Habit Tracker</h1>
     <p data-i18n="get.p">Build habits, earn a habit pal every day. Free on iPhone.</p>
@@ -72,5 +76,6 @@
       });
     }
   </script>
+<script>(function(){var b=document.querySelector('.tt-copy');if(!b)return;b.addEventListener('click',function(){var u=b.getAttribute('data-url');var done=function(){b.textContent=(window.I18N&&window.I18N['tt.copied'])||'Copied. Now paste it in Safari.';b.classList.add('ok');};function fallback(){var t=document.createElement('textarea');t.value=u;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(t);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(done,fallback);}else{fallback();}});})();</script>
 </body>
 </html>

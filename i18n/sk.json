@@ -141,5 +141,7 @@
  "get.free": "Zadarmo",
  "get.langs": "30 jazykov",
  "get.more": "Pozri, ako to funguje →",
- "tt.open_safari": "Otvoriť v Safari"
+ "tt.open_safari": "Otvoriť v Safari",
+ "tt.copy": "Skopírovať odkaz na App Store",
+ "tt.copied": "Skopírované. Vložte ho do Safari."
 }

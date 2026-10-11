@@ -141,5 +141,7 @@
  "get.free": "Miễn phí",
  "get.langs": "30 ngôn ngữ",
  "get.more": "Xem cách hoạt động →",
- "tt.open_safari": "Mở trong Safari"
+ "tt.open_safari": "Mở trong Safari",
+ "tt.copy": "Sao chép liên kết App Store",
+ "tt.copied": "Đã sao chép. Dán vào Safari."
 }

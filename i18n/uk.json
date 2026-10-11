@@ -141,5 +141,7 @@
  "get.free": "Безкоштовно",
  "get.langs": "30 мов",
  "get.more": "Як це працює →",
- "tt.open_safari": "Відкрити в Safari"
+ "tt.open_safari": "Відкрити в Safari",
+ "tt.copy": "Скопіювати посилання App Store",
+ "tt.copied": "Скопійовано. Вставте його в Safari."
 }

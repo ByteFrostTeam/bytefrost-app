@@ -141,5 +141,7 @@
  "get.free": "Ilmainen",
  "get.langs": "30 kieltä",
  "get.more": "Katso, miten se toimii →",
- "tt.open_safari": "Avaa Safarissa"
+ "tt.open_safari": "Avaa Safarissa",
+ "tt.copy": "Kopioi App Store -linkki",
+ "tt.copied": "Kopioitu. Liitä se Safariin."
 }
